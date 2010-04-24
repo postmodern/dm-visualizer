@@ -16,15 +16,41 @@ DataMapper based Ruby project.
 
 ## Synopsis
 
-* Visualize a library that uses DataMapper:
+Visualize a library that uses DataMapper:
 
-      $ dm-visualizer graphviz doc/schema.png -I lib -I ext -r library
+    $ dm-visualizer graphviz doc/schema.png -I lib -I ext -r library
 
-* Visualize a Rails 3 project that is using dm-rails:
+Visualize a Rails 3 project that is using dm-rails:
 
-      $ dm-visualizer graphviz doc/schema.png -I lib -r app/models/*.rb
+    $ dm-visualizer graphviz doc/schema.png -I lib -r app/models/*.rb
 
 ## Examples
+
+As a rake task in a Ruby library:
+
+    require 'dm-visualizer/graphviz'
+
+    namespace :doc do
+      task :db do
+        DataMapper::Visualizer::GraphViz.new(
+	  'doc/db.png',
+	  :include => ['lib'],
+	  :require => ['my_library/models']
+	).visualize
+      end
+    end
+
+As a rake task in a Rails3 / [dm-rails](http://github.com/datamapper/dm-rails) app:
+
+    require 'dm-visualizer/graphviz'
+
+    namespace :doc do
+      task :db => 'db:load_models' do
+        DataMapper::Visualizer::GraphViz.new(
+	  'doc/db.png'
+	).visualize
+      end
+    end
 
 ## Requirements
 
