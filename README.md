@@ -23,7 +23,7 @@ Visualize a library that uses DataMapper:
 
 Visualize a Rails 3 project that is using dm-rails:
 
-    $ dm-visualizer graphviz doc/schema.png -I lib -r app/models/*.rb
+    $ dm-visualizer graphviz doc/schema.png -I lib -R app/models/*.rb
 
 ## Examples
 
