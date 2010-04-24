@@ -58,7 +58,7 @@ module DataMapper
         @labels = {:one_to_many => '1:m', :one_to_one => '1:1'}
 
         if options[:output_format]
-          @output_format = options[:output_format]
+          @output_format = options[:output_format].to_sym
         end
 
         if options[:colors]
