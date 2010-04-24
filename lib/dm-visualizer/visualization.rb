@@ -143,9 +143,9 @@ module DataMapper
           storage_name ||= NamingConventions::Resource::UnderscoredAndPluralized.call(model.name)
 
           if name
-            "#{name}.#{model.storage_name}"
+            "#{name}.#{storage_name}"
           else
-            model.storage_name
+            storage_name
           end
         else
           class_name(model)
