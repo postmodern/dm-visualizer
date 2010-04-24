@@ -104,14 +104,14 @@ module DataMapper
             graph.add_edge(
               source_node,
               target_node,
-              :color => @colors[:one_to_many]
+              :color => @colors[:one_to_many],
               :label => " #{@labels[:one_to_many]}"
             )
           when DataMapper::Associations::OneToOne::Relationship
             graph.add_edge(
               source_node,
               target_node,
-              :color => @colors[:one_to_one]
+              :color => @colors[:one_to_one],
               :label => " #{@labels[:one_to_one]}"
             )
           end
