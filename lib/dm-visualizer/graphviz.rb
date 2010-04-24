@@ -20,7 +20,7 @@ module DataMapper
       attr_accessor :path
 
       # The output file format (`:png`)
-      attr_accessor :output_format
+      attr_accessor :format
 
       # The colors to use
       attr_reader :colors
@@ -37,7 +37,7 @@ module DataMapper
       # @param [Hash] options
       #   Additional options.
       #
-      # @option options [Symbol] :output_format (:png)
+      # @option options [Symbol] :format (:png)
       #   The format of the generated graph.
       #
       # @option options [Hash] :colors
@@ -52,13 +52,13 @@ module DataMapper
         super(options)
 
         @path = path
-        @output_format = :png
+        @format = :png
 
         @colors = {:one_to_many => 'blue', :one_to_one => 'red'}
         @labels = {:one_to_many => '1:m', :one_to_one => '1:1'}
 
-        if options[:output_format]
-          @output_format = options[:output_format].to_sym
+        if options[:format]
+          @format = options[:format].to_sym
         end
 
         if options[:colors]
@@ -123,7 +123,7 @@ module DataMapper
           end
         end
 
-        graph.output(@output_format => @path)
+        graph.output(@format => @path)
       end
 
     end
