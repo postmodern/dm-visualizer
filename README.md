@@ -13,6 +13,7 @@ DataMapper based Ruby project.
 
 * Safely loads the models of a project.
 * Generates a GraphViz diagram for a project.
+* Supports both DataMapper 0.10.2 and 0.10.3.
 
 ## Synopsis
 
