@@ -10,6 +10,9 @@ module DataMapper
       # The directories to include
       attr_reader :include_dirs
 
+      # The paths to require
+      attr_reader :require_paths
+
       # The path glob patterns to require
       attr_reader :require_globs
 
@@ -23,10 +26,14 @@ module DataMapper
       #   The directories to include into the `$LOAD_PATH` global variable.
       #
       # @option options [Array] :require
+      #   The paths to require.
+      #
+      # @option options [Array] :require_all
       #   The path globs to require.
       #
       def initialize(options={})
         @include_dirs = Set[]
+        @require_paths = Set[]
         @require_globs = Set[]
 
         if options[:include]
@@ -34,7 +41,11 @@ module DataMapper
         end
 
         if options[:require]
-          @require_globs += options[:require]
+          @require_paths += options[:require]
+        end
+
+        if options[:require_all]
+          @require_globs += options[:require_all]
         end
       end
 
@@ -70,6 +81,14 @@ module DataMapper
       #
       def load!
         activate!
+
+        @require_paths.each do |path|
+          begin
+            require path
+          rescue LoadError => e
+            STDERR.puts "dm-visualizer: unable to load #{path}"
+          end
+        end
 
         @require_globs.each do |glob|
           @include_dirs.each do |dir|

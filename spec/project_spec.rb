@@ -12,7 +12,7 @@ describe DataMapper::Visualizer::Project do
       @dir = project_dir('library')
       @project = DataMapper::Visualizer::Project.new(
         :include => [File.join(@dir,'lib')],
-        :require => ['library.rb']
+        :require => ['library']
       )
     end
 
@@ -24,7 +24,7 @@ describe DataMapper::Visualizer::Project do
       @dir = project_dir('rails')
       @project = DataMapper::Visualizer::Project.new(
         :include => [@dir],
-        :require => ['app/models/*.rb']
+        :require_all => ['app/models/*.rb']
       )
     end
 
