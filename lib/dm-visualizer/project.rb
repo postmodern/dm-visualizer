@@ -1,4 +1,5 @@
 require 'set'
+require 'dm-core'
 
 module DataMapper
   module Visualizer
@@ -104,6 +105,9 @@ module DataMapper
             end
           end
         end
+
+        # Setup an in-memory sqlite3 database
+        DataMapper.setup(:default, 'sqlite3::memory:')
 
         deactivate!
         return true
