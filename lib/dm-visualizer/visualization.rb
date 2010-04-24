@@ -19,7 +19,7 @@ module DataMapper
       attr_accessor :naming_convention
 
       # Specifies whether to demodulize class names.
-      attr_accessor :demodulize
+      attr_accessor :full_names
 
       #
       # Initializes a new visualization.
@@ -36,7 +36,7 @@ module DataMapper
       # @option options [Symbol] :naming_convention
       #   The naming convention to use. May be either `:ruby` or `:sql`.
       #
-      # @option options [Boolean] :demodulize
+      # @option options [Boolean] :full_names
       #   Specifies whether to demodulize class names.
       #
       def initialize(options={})
@@ -44,7 +44,7 @@ module DataMapper
 
         @repository_names = {}
         @naming_convention = :ruby
-        @demodulize = true
+        @full_names = false
 
         if options[:repository_names]
           options[:repository_names].each do |name,db_name|
@@ -60,8 +60,8 @@ module DataMapper
           @naming_convention = options[:naming_convention].to_sym
         end
 
-        if options.has_key?(:demodulize)
-          @demodulize = options[:demodulize]
+        if options.has_key?(:full_names)
+          @full_names  = options[:full_names]
         end
 
         @project.load!
@@ -83,7 +83,7 @@ module DataMapper
                  obj.class.name
                end
 
-        name = name.demodulize if @demodulize
+        name = name.demodulize unless @full_names
 
         return name
       end
