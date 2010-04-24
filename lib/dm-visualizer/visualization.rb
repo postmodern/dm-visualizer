@@ -1,3 +1,5 @@
+require 'dm-visualizer/project'
+
 require 'dm-core'
 
 module DataMapper
@@ -6,6 +8,9 @@ module DataMapper
     # The base class for all visualizations.
     #
     class Visualization
+
+      # The project that will be visualized
+      attr_reader :project
 
       # Mapping of DataMapper repository names and their actual names.
       attr_reader :repository_names
@@ -35,6 +40,8 @@ module DataMapper
       #   Specifies whether to demodulize class names.
       #
       def initialize(options={})
+        @project = Project.new(options)
+
         @repository_names = {}
         @naming_convention = :ruby
         @demodulize = true
@@ -145,7 +152,7 @@ module DataMapper
       # @param [Project] project
       #   The project to visualize.
       #
-      def visualize!(project)
+      def visualize!
       end
 
     end
