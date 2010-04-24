@@ -33,10 +33,10 @@ As a rake task in a Ruby library:
     namespace :doc do
       task :db do
         DataMapper::Visualizer::GraphViz.new(
-	  'doc/db.png',
-	  :include => ['lib'],
-	  :require => ['my_library/models']
-	).visualize
+          'doc/db.png',
+          :include => ['lib'],
+          :require => ['my_library/models']
+        ).visualize
       end
     end
 
@@ -47,8 +47,8 @@ As a rake task in a Rails3 / [dm-rails](http://github.com/datamapper/dm-rails) a
     namespace :doc do
       task :db => 'db:load_models' do
         DataMapper::Visualizer::GraphViz.new(
-	  'doc/db.png'
-	).visualize
+          'doc/db.png'
+        ).visualize
       end
     end
 
