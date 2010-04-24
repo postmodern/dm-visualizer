@@ -98,7 +98,7 @@ module DataMapper
       #   The property name.
       #
       def property_name(property)
-        property.name
+        property.name.to_s
       end
 
       #
