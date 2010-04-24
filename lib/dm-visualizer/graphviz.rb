@@ -9,7 +9,7 @@ rescue ::LoadError
 end
 
 module DataMapper
-  module Vizualizer
+  module Visualizer
     #
     # Visualizes projects by generating a
     # [GraphViz](http://www.graphviz.org/) diagram.
