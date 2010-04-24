@@ -22,8 +22,8 @@ module DataMapper
       # Mapping of DataMapper repository names and their actual names.
       attr_reader :repository_names
 
-      # Specifies which naming convention to use (`:ruby` or `:sql`).
-      attr_accessor :naming_convention
+      # Specifies which naming style to use (`:ruby` or `:sql`).
+      attr_accessor :style
 
       # Specifies whether to demodulize class names.
       attr_accessor :full_names
@@ -40,8 +40,8 @@ module DataMapper
       # @option options [String] :repository_name
       #   The actual name to use for the `:default` DataMappe repository.
       #
-      # @option options [Symbol] :naming_convention
-      #   The naming convention to use. May be either `:ruby` or `:sql`.
+      # @option options [Symbol] :style
+      #   The naming style to use. May be either `:ruby` or `:sql`.
       #
       # @option options [Boolean] :full_names
       #   Specifies whether to demodulize class names.
@@ -50,7 +50,7 @@ module DataMapper
         @project = Project.new(options)
 
         @repository_names = {}
-        @naming_convention = :ruby
+        @style = :ruby
         @full_names = false
 
         if options[:repository_names]
@@ -63,8 +63,8 @@ module DataMapper
           @database_names[:default] = options[:repository_name].to_s
         end
 
-        if options[:naming_convention]
-          @naming_convention = options[:naming_convention].to_sym
+        if options[:style]
+          @style = options[:style].to_sym
         end
 
         if options.has_key?(:full_names)
@@ -144,7 +144,7 @@ module DataMapper
       #   The name of the model.
       #
       def model_name(model)
-        if @naming_convention == :sql
+        if @style == :sql
           name = model_repository_name(model)
           storage_name = model.storage_names[:default]
           storage_name ||= NamingConventions::Resource::UnderscoredAndPluralized.call(model.name)

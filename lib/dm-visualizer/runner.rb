@@ -22,7 +22,7 @@ module DataMapper
         method_option :require, :type => :array, :aliases => '-r'
         method_option :require_all, :type => :array, :aliases => '-R'
         method_option :repository_names, :type => :hash
-        method_option :naming_convention, :type => :string
+        method_option :style, :type => :string
         method_option :full_names, :type => :boolean
       end
 
