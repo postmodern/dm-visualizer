@@ -143,7 +143,7 @@ module DataMapper
           if name
             "#{name}.#{model.storage_name}"
           else
-            mode.storage_name
+            model.storage_name
           end
         else
           class_name(model)
