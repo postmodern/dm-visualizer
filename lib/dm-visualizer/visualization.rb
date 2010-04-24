@@ -124,10 +124,7 @@ module DataMapper
       #   The repository name.
       #
       def model_repository_name(model)
-        name = @repository_names[model.default_repository_name]
-        name ||= model.default_repository_name.to_s
-
-        return name
+        @repository_names[model.default_repository_name]
       end
 
       #
@@ -141,7 +138,13 @@ module DataMapper
       #
       def model_name(model)
         if @naming_convention == :sql
-          "#{model_repository_name(model)}.#{model.storage_name}"
+          name = model_repository_name(model)
+
+          if name
+            "#{name}.#{model.storage_name}"
+          else
+            mode.storage_name
+          end
         else
           class_name(model)
         end
