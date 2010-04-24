@@ -106,9 +106,6 @@ module DataMapper
           end
         end
 
-        # Setup an in-memory sqlite3 database
-        DataMapper.setup(:default, 'sqlite3::memory:')
-
         deactivate!
         return true
       end

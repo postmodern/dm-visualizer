@@ -139,6 +139,8 @@ module DataMapper
       def model_name(model)
         if @naming_convention == :sql
           name = model_repository_name(model)
+          storage_name = model.storage_names[:default]
+          storage_name ||= NamingConventions::Resource::UnderscoredAndPluralized.call(model.name)
 
           if name
             "#{name}.#{model.storage_name}"
