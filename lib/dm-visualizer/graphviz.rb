@@ -16,9 +16,6 @@ module DataMapper
     #
     class GraphViz < Visualization
 
-      # The output path
-      attr_accessor :path
-
       # The output file format (`:png`)
       attr_accessor :format
 
@@ -30,9 +27,6 @@ module DataMapper
 
       #
       # Creates a new GraphViz object.
-      #
-      # @param [String] path
-      #   The path to save the graph to.
       #
       # @param [Hash] options
       #   Additional options.
@@ -48,10 +42,9 @@ module DataMapper
       #   The labels to use for `:one_to_many` and `:one_to_one`
       #   relationship edges.
       #
-      def initialize(path,options={})
+      def initialize(options={})
         super(options)
 
-        @path = path
         @format = :png
 
         @colors = {:one_to_many => 'blue', :one_to_one => 'red'}
@@ -77,10 +70,10 @@ module DataMapper
       #
       # Generates a GraphViz diagram for a project.
       #
-      # @param [Project] project
-      #   The project to visualize.
+      # @param [String] path
+      #   The path to save the graph image to.
       #
-      def visualize
+      def visualize(path)
         graph = ::GraphViz.new(:G, :type => :digraph)
 
         # Create node for each model
@@ -123,7 +116,7 @@ module DataMapper
           end
         end
 
-        graph.output(@format => @path)
+        graph.output(@format => path)
       end
 
     end

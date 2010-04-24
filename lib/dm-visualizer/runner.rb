@@ -12,10 +12,7 @@ module DataMapper
       method_option :colors, :type => :hash
       method_option :labels, :type => :hash
       def graphviz(path)
-        DataMapper::Visualizer::GraphViz.new(
-          path,
-          options
-        ).visualize
+        DataMapper::Visualizer::GraphViz.new(options).visualize(path)
       end
 
       protected
