@@ -18,11 +18,11 @@ DataMapper based Ruby project.
 
 * Visualize a library that uses DataMapper:
 
-    $ dm-visualizer graphviz doc/schema.png -I lib -I ext -r library
+      $ dm-visualizer graphviz doc/schema.png -I lib -I ext -r library
 
 * Visualize a Rails 3 project that is using dm-rails:
 
-    $ dm-visualizer graphviz doc/schema.png -I lib -r app/models/*.rb
+      $ dm-visualizer graphviz doc/schema.png -I lib -r app/models/*.rb
 
 ## Examples
 
