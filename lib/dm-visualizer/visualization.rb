@@ -154,7 +154,7 @@ module DataMapper
       # @param [Project] project
       #   The project to visualize.
       #
-      def visualize!
+      def visualize
       end
 
     end

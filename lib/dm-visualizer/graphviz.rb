@@ -80,7 +80,7 @@ module DataMapper
       # @param [Project] project
       #   The project to visualize.
       #
-      def visualize!
+      def visualize
         graph = ::GraphViz.new(:G, :type => :digraph)
 
         # Create node for each model
