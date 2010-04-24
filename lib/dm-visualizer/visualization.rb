@@ -63,6 +63,8 @@ module DataMapper
         if options.has_key?(:demodulize)
           @demodulize = options[:demodulize]
         end
+
+        @project.load!
       end
 
       #

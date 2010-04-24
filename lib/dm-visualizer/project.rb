@@ -39,24 +39,6 @@ module DataMapper
       end
 
       #
-      # Creates a new project and loads it's files.
-      #
-      # @param [Hash] options
-      #   Additional options.
-      #
-      # @yield [project]
-      #
-      # @yieldparam [Project] project
-      #
-      def Project.load(options={},&block)
-        project = Project.new(options)
-        project.load!
-
-        block.call(project) if block
-        return project
-      end
-
-      #
       # Activates the project by adding it's include directories to the
       # `$LOAD_PATH` global variable.
       #
