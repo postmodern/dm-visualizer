@@ -26,6 +26,10 @@ DataMapper based Ruby project.
 
 ## Examples
 
+## Requirements
+
+* [dm-core](http://github.com/datamapper/dm-core) >= 0.10.2
+
 ## Install
 
     $ sudo gem install dm-visualizer
