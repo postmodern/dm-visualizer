@@ -85,11 +85,11 @@ module DataMapper
 
         # Create node for each model
         project.each_model do |model|
-          properties = each_property(model).map do |property|
+          properties = project.each_property(model).map do |property|
             "#{property_name(property)}: #{property_type_name(property)}"
           end
 
-          foreign_keys = each_foreign_key(model).map do |key,model|
+          foreign_keys = project.each_foreign_key(model).map do |key,model|
             "#{foreign_key_name(key)}: #{model_name(model)}"
           end
 
