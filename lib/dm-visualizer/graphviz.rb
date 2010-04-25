@@ -105,8 +105,6 @@ module DataMapper
 
         # Connect model nodes together by relationship
         project.each_relationship do |relationship,model|
-          next if relationship.respond_to?(:through)
-
           source_node = graph.get_node(model_name(model))
           target_node = graph.get_node(model_name(relationship.target_model))
 

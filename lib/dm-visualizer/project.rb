@@ -283,7 +283,9 @@ module DataMapper
 
         each_model do |model|
           model.relationships.each_value do |relationship|
-            yield relationship, model
+            unless relationship.respond_to?(:through)
+              yield relationship, model
+            end
           end
         end
       end
