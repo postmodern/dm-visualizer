@@ -1,4 +1,4 @@
-require 'dm-serializer/graphviz'
+require 'dm-visualizer/graphviz'
 
 require 'thor'
 
