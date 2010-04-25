@@ -38,7 +38,9 @@ module DataMapper
         @require_globs = Set[]
 
         if options[:include]
-          @include_dirs += options[:include]
+          options[:include].each do |dir|
+            @include_dirs << File.expand_path(dir)
+          end
         end
 
         if options[:require]
@@ -88,6 +90,7 @@ module DataMapper
             require path
           rescue LoadError => e
             STDERR.puts "dm-visualizer: unable to load #{path}"
+            STDERR.puts "dm-visualizer: #{e.message}"
           end
         end
 
