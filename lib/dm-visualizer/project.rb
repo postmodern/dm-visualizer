@@ -260,10 +260,7 @@ module DataMapper
           next if relationship.respond_to?(:through)
 
           case relationship
-          when Associations::ManyToOne::Relationship
-            yield relationship.parent_key.first.name,
-                  relationship.parent_model
-          when Associations::OneToMany::Relationship,
+          when Associations::ManyToOne::Relationship,
                Associations::OneToOne::Relationship
             yield relationship.child_key.first.name,
                   relationship.child_model
