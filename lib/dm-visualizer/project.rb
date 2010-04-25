@@ -257,6 +257,8 @@ module DataMapper
         end
 
         model.relationships.each_value do |relationship|
+          next if relationship.respond_to?(:through)
+
           case relationship
           when Associations::ManyToOne::Relationship
             yield relationship.parent_key.first.name,
