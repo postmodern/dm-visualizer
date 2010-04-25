@@ -171,6 +171,30 @@ module DataMapper
       end
 
       #
+      # Enumerates over each DataMapper Model loaded from the project,
+      # and their direct ancestors.
+      #
+      # @yield [model, direct_ancestor]
+      #   The given block will be passed every model and their immediate
+      #   ancestor.
+      #
+      # @yieldparam [DataMapper::Model] model
+      #   The model.
+      #
+      # @yieldparam [DataMapper::Model] direct_ancestor
+      #   The first ancestor of the model.
+      #
+      def each_model_inheritence
+        each_model do |model|
+          direct_ancestor = model.ancestors[1]
+
+          if direct_ancestor.class == Class
+            yield model, direct_ancestor
+          end
+        end
+      end
+
+      #
       # Enumerates over each DataMapper property from each model.
       #
       # @yield [property,model]
