@@ -223,7 +223,9 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_property(model)
-        return Enumerator.new(self,:each_property) unless block_given?
+        unless block_given?
+          return Enumerator.new(self,:each_property,model)
+        end
 
         model.properties.each do |property|
           yield property
@@ -250,7 +252,9 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_foreign_key(model)
-        return Enumerator.new(self,:each_foreign_key) unless block_given?
+        unless block_given?
+          return Enumerator.new(self,:each_foreign_key,model)
+        end
 
         model.relationships.each_value do |relationship|
           yield relationship.child_key.first.name,
