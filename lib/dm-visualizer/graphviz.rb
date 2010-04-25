@@ -85,11 +85,16 @@ module DataMapper
 
         # Create node for each model
         project.each_model do |model|
-          properties = model.properties.map do |property|
+          properties = each_property(model).map do |property|
             "#{property_name(property)}: #{property_type_name(property)}"
           end
 
-          label = "{ #{model_name(model)} | #{properties.join("\n")} }"
+          foreign_keys = each_foreign_key(model).map do |key,model|
+            "#{foreign_key_name(key)}: #{model_name(model)}"
+          end
+
+          columns = (properties + foreign_keys)
+          label = "{ #{model_name(model)} | #{columns.join("\n")} }"
 
           graph.add_node(
             model_name(model),
