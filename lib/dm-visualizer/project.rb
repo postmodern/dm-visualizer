@@ -257,8 +257,14 @@ module DataMapper
         end
 
         model.relationships.each_value do |relationship|
-          yield relationship.child_key.first.name,
-                relationship.child_model
+          case relationship
+          when Associations::ManyToOne::Relationship
+            yield relationship.parent_key.first.name,
+                  relationship.parent_model
+          else
+            yield relationship.child_key.first.name,
+                  relationship.child_model
+          end
         end
       end
 
