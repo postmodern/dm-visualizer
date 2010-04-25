@@ -125,8 +125,8 @@ module DataMapper
 
         # Connect model nodes by inheritence
         project.each_model_inheritence do |model,ancestor|
-          source_node = graph.get_node(model_name(model))
-          target_node = graph.get_node(model_name(ancestor))
+          source_node = graph.get_node(model_name(ancestor))
+          target_node = graph.get_node(model_name(model))
 
           graph.add_edge(
             source_node,
