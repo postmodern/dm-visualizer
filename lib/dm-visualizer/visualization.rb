@@ -109,6 +109,22 @@ module DataMapper
       end
 
       #
+      # Returns the name the given foreign key.
+      #
+      # @param [Symbol] key
+      #   The foreign key.
+      #
+      # @return [String]
+      #   The foreign key name.
+      #
+      def foreign_key_name(key)
+        key = key.to_s
+
+        key.gsub(/_id$/,'') unless @style == :sql
+        return key
+      end
+
+      #
       # Returns the type name of a property.
       #
       # @param [DataMapper::Property] property
