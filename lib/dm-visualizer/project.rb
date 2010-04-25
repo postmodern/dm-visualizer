@@ -11,6 +11,9 @@ module DataMapper
       # The directories to include
       attr_reader :include_dirs
 
+      # Specifies which Bundler groups to activate.
+      attr_accessor :bundle
+
       # The paths to require
       attr_reader :require_paths
 
@@ -26,6 +29,9 @@ module DataMapper
       # @option options [Array] :include
       #   The directories to include into the `$LOAD_PATH` global variable.
       #
+      # @option options [Boolean, Array] :bundle
+      #   Specifies which groups of dependencies to activate using Bundler.
+      #
       # @option options [Array] :require
       #   The paths to require.
       #
@@ -34,12 +40,19 @@ module DataMapper
       #
       def initialize(options={})
         @include_dirs = Set[]
+        @bundle = Set[]
         @require_paths = Set[]
         @require_globs = Set[]
 
         if options[:include]
           options[:include].each do |dir|
             @include_dirs << File.expand_path(dir)
+          end
+        end
+
+        if options[:bundle]
+          options[:bundle].each do |group|
+            @bundle << group.to_sym
           end
         end
 
@@ -53,6 +66,33 @@ module DataMapper
       end
 
       #
+      # Activates dependencies of the project using Bundler.
+      #
+      # @return [true]
+      #
+      def bundle!
+        unless File.file?('Gemfile')
+          STDERR.puts "Gemfile is missing or not a valid file."
+        end
+
+        begin
+          require 'bundler'
+        rescue LoadError => e
+          STDERR.puts "Gemfile exists, but bundler is not installed"
+          STDERR.puts "Run `gem install bundler` to install bundler."
+        end
+
+        begin
+          Bundler.setup(*@bundle)
+        rescue Bundler::BundleError => e
+          STDERR.puts e.message
+          STDERR.puts "Run `bundle install` to install missing gems"
+        end
+
+        return true
+      end
+
+      #
       # Activates the project by adding it's include directories to the
       # `$LOAD_PATH` global variable.
       #
@@ -63,21 +103,8 @@ module DataMapper
           $LOAD_PATH << dir if File.directory?(dir)
         end
 
-        if File.directory?('Gemfile')
-          begin
-            require 'bundler'
-          rescue LoadError => e
-            STDERR.puts "Gemfile exists, but bundler is not installed"
-            STDERR.puts "Run `gem install bundler` to install bundler."
-          end
-
-          begin
-            Bundler.setup()
-          rescue Bundler::BundleError => e
-            STDERR.puts e.message
-            STDERR.puts "Run `bundle install` to install missing gems"
-          end
-        end
+        # use Bundler if a Gemfile is present
+        bundle! if File.file?('Gemfile')
 
         return true
       end
