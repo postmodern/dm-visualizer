@@ -1,6 +1,8 @@
 require 'set'
 require 'dm-core'
 
+require 'enumerator'
+
 module DataMapper
   module Visualizer
     #
@@ -166,6 +168,9 @@ module DataMapper
       # @yieldparam [DataMapper::Model]
       #   A model loaded from the project.
       #
+      # @return [Enumerator]
+      #   If no block is given, an Enumerator object will be returned.
+      #
       def each_model(&block)
         DataMapper::Model.descendants.each(&block)
       end
@@ -184,7 +189,14 @@ module DataMapper
       # @yieldparam [DataMapper::Model] direct_ancestor
       #   The first ancestor of the model.
       #
+      # @return [Enumerator]
+      #   If no block is given, an Enumerator object will be returned.
+      #
       def each_model_inheritence
+        unless block_given?
+          return Enumerator.new(self,:each_model_inheritence)
+        end
+
         each_model do |model|
           direct_ancestor = model.ancestors[1]
 
@@ -207,7 +219,12 @@ module DataMapper
       # @yieldparam [DataMapper::Property] property
       #   The property.
       #
+      # @return [Enumerator]
+      #   If no block is given, an Enumerator object will be returned.
+      #
       def each_property(model)
+        return Enumerator.new(self,:each_property) unless block_given?
+
         model.properties.each do |property|
           yield property
         end
@@ -229,7 +246,12 @@ module DataMapper
       # @yieldparam [DataMapper::Model] foreign_model
       #   The model that the foreign-key references.
       #
+      # @return [Enumerator]
+      #   If no block is given, an Enumerator object will be returned.
+      #
       def each_foreign_key(model)
+        return Enumerator.new(self,:each_foreign_key) unless block_given?
+
         model.relationships.each_value do |relationship|
           yield relationship.child_key.first.name,
                 relationship.child_model
@@ -249,7 +271,12 @@ module DataMapper
       # @yieldparam [DataMapper::Model] model
       #   The model that the relationship belongs to.
       #
+      # @return [Enumerator]
+      #   If no block is given, an Enumerator object will be returned.
+      #
       def each_relationship
+        return Enumerator.new(self,:each_relationship) unless block_given?
+
         each_model do |model|
           model.relationships.each_value do |relationship|
             yield relationship, model
