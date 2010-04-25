@@ -263,7 +263,7 @@ module DataMapper
           when Associations::ManyToOne::Relationship,
                Associations::OneToOne::Relationship
             yield relationship.child_key.first.name,
-                  relationship.child_model
+                  relationship.parent_model
           end
         end
       end
