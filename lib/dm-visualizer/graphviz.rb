@@ -47,8 +47,15 @@ module DataMapper
 
         @format = :png
 
-        @colors = {:one_to_many => 'blue', :one_to_one => 'red'}
-        @labels = {:one_to_many => '1:m', :one_to_one => '1:1'}
+        @colors = {
+          :one_to_many => 'blue',
+          :one_to_one => 'red',
+          :inheritence => 'cyan'
+        }
+        @labels = {
+          :one_to_many => '1:m',
+          :one_to_one => '1:1'
+        }
 
         if options[:format]
           @format = options[:format].to_sym
@@ -91,7 +98,7 @@ module DataMapper
           )
         end
 
-        # Connect nodes together
+        # Connect model nodes together by relationship
         project.each_relationship do |relationship,model|
           next if relationship.respond_to?(:through)
 
@@ -114,6 +121,18 @@ module DataMapper
               :label => " #{@labels[:one_to_one]}"
             )
           end
+        end
+
+        # Connect model nodes by inheritence
+        project.each_model_inheritence do |model,ancestor|
+          source_node = graph.get_node(model_name(model))
+          target_node = graph.get_node(model_name(ancestor))
+
+          graph.add_edge(
+            source_node,
+            target_node,
+            :color => @colors[:inheritence]
+          )
         end
 
         graph.output(@format => path)
