@@ -120,7 +120,7 @@ module DataMapper
       def foreign_key_name(key)
         key = key.to_s
 
-        key.gsub(/_id$/,'') unless @style == :sql
+        key.gsub!(/_id$/,'') unless @style == :sql
         return key
       end
 
