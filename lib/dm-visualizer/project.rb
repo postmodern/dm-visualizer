@@ -195,23 +195,44 @@ module DataMapper
       end
 
       #
-      # Enumerates over each DataMapper property from each model.
+      # Enumerates over each DataMapper property from a given model.
       #
-      # @yield [property,model]
-      #   The given block will be passed every property from every model
-      #   that is registered with DataMapper.
+      # @param [DataMapper::Model] model
+      #   The given model.
+      #
+      # @yield [property]
+      #   The given block will be passed every property from the given
+      #   model.
       #
       # @yieldparam [DataMapper::Property] property
       #   The property.
       #
-      # @yieldparam [DataMapper::Model] model
-      #   The model that the property belongs to.
+      def each_property(model)
+        model.properties.each do |property|
+          yield property
+        end
+      end
+
       #
-      def each_property
-        each_model do |model|
-          model.properties.each do |property|
-            yield property, model
-          end
+      # Enumerates over every foreign-key in a given model.
+      #
+      # @param [DataMapper::Model] model
+      #   The given model.
+      #
+      # @yield [foreign_key, foreign_model]
+      #   The given block will be passed every foreign-key and the model
+      #   that the foreign-key will reference.
+      #
+      # @yieldparam [String] foreign_key
+      #   The name of the foreign-key.
+      #
+      # @yieldparam [DataMapper::Model] foreign_model
+      #   The model that the foreign-key references.
+      #
+      def each_foreign_key(model)
+        model.relationships.each_value do |relationship|
+          yield relationship.child_key.first.name,
+                relationship.child_model
         end
       end
 
