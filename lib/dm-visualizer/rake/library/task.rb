@@ -4,7 +4,7 @@ module DataMapper
   module Visualizer
     module Rake
       module Library
-        class Task < Rake::TaskLib
+        class Task < ::Rake::TaskLib
           # The default options to pass to a new {Visualization}
           DEFAULT_OPTIONS = {
             :include => ['ext', 'lib'],
