@@ -74,21 +74,21 @@ module DataMapper
       #
       def bundle!
         unless File.file?('Gemfile')
-          STDERR.puts "Gemfile is missing or not a valid file."
+          log "Gemfile is missing or not a valid file."
         end
 
         begin
           require 'bundler'
         rescue LoadError => e
-          STDERR.puts "Gemfile exists, but bundler is not installed"
-          STDERR.puts "Run `gem install bundler` to install bundler."
+          log "Gemfile exists, but bundler is not installed"
+          log "Run `gem install bundler` to install bundler."
         end
 
         begin
           Bundler.setup(*@bundle)
         rescue Bundler::BundleError => e
-          STDERR.puts e.message
-          STDERR.puts "Run `bundle install` to install missing gems"
+          log e.message
+          log "Run `bundle install` to install missing gems"
         end
 
         return true
@@ -134,8 +134,8 @@ module DataMapper
           begin
             require path
           rescue LoadError => e
-            STDERR.puts "dm-visualizer: unable to load #{path}"
-            STDERR.puts "dm-visualizer: #{e.message}"
+            log "dm-visualizer: unable to load #{path}"
+            log "dm-visualizer: #{e.message}"
           end
         end
 
@@ -147,8 +147,8 @@ module DataMapper
               begin
                 require relative_path
               rescue LoadError => e
-                STDERR.puts "dm-visualizer: unable to load #{relative_path} from #{dir}"
-                STDERR.puts "dm-visualizer: #{e.message}"
+                log "dm-visualizer: unable to load #{relative_path} from #{dir}"
+                log "dm-visualizer: #{e.message}"
               end
             end
           end
@@ -294,6 +294,18 @@ module DataMapper
             end
           end
         end
+      end
+
+      protected
+
+      #
+      # Prints a message to `STDERR`.
+      #
+      # @param [String] message
+      #   The message to print.
+      #
+      def log(message)
+        STDERR.puts "dm-visualizer: #{message}"
       end
 
     end
