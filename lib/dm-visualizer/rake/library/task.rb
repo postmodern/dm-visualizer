@@ -31,9 +31,7 @@ module DataMapper
           #
           def define(&block)
             namespace :dm do
-              namespace :doc do
-                instance_eval(&block) if block
-              end
+              namespace(:doc,&block)
             end
           end
 
