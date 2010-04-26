@@ -34,6 +34,8 @@ Gem::Specification.new do |s|
      "lib/dm-visualizer/project.rb",
      "lib/dm-visualizer/rake/library/graphviz_task.rb",
      "lib/dm-visualizer/rake/library/task.rb",
+     "lib/dm-visualizer/rake/rails/graphviz_task.rb",
+     "lib/dm-visualizer/rake/rails/task.rb",
      "lib/dm-visualizer/runner.rb",
      "lib/dm-visualizer/version.rb",
      "lib/dm-visualizer/visualization.rb",
