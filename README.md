@@ -13,42 +13,32 @@ DataMapper based Ruby project.
 
 * Safely loads the models of a project.
 * Generates a GraphViz diagram for a project.
+  * Provides Rake tasks for both Ruby libraries and Rails3 apps.
 * Supports both DataMapper 0.10.2 and 0.10.3.
 
 ## Synopsis
 
 Visualize a library that uses DataMapper:
 
-    $ dm-visualizer graphviz doc/schema.png -I lib -I ext -r library
+    $ dm-visualizer graphviz doc/data_mapper.png -I lib -I ext -r library
 
 Visualize a Rails 3 project that is using dm-rails:
 
-    $ dm-visualizer graphviz doc/schema.png -I lib -R app/models/*.rb
+    $ dm-visualizer graphviz doc/data_mapper.png -I lib . -R app/models/*.rb
 
 ## Examples
 
-As a rake task in a Ruby library:
+Add the `dm:doc:graphviz` rake task to a Ruby library:
 
-    require 'dm-visualizer/graphviz'
+    require 'dm-visualizer/rake/library/graphviz_task'
+    DataMapper::Visualizer::Rake::Library::GraphVizTask.new(
+      :require => ['my_library/models']
+    )
 
-    namespace :doc do
-      task :db do
-        DataMapper::Visualizer::GraphViz.new(
-          :include => ['lib'],
-          :require => ['my_library/models']
-        ).visualize('doc/db.png')
-      end
-    end
+Add the `db:doc:graphviz` rake task to a Rails3 / [dm-rails](http://github.com/datamapper/dm-rails) app:
 
-As a rake task in a Rails3 / [dm-rails](http://github.com/datamapper/dm-rails) app:
-
-    require 'dm-visualizer/graphviz'
-
-    namespace :doc do
-      task :db => 'db:load_models' do
-        DataMapper::Visualizer::GraphViz.new().visualize('doc/db.png')
-      end
-    end
+    require 'dm-visualizer/rake/rails/graphviz_task'
+    DataMapper::Visualizer::Rake::Rails::GraphVizTask.new
 
 ## Requirements
 
