@@ -70,8 +70,6 @@ module DataMapper
         if options.has_key?(:full_names)
           @full_names  = options[:full_names]
         end
-
-        @project.load!
       end
 
       #
@@ -174,6 +172,20 @@ module DataMapper
           class_name(model)
         end
       end
+
+      #
+      # Loads the project and visualizes it.
+      #
+      # @param [Array] arguments
+      #   Additional arguments to pass to {visualize}.
+      #
+      def visualize!(*arguments)
+        @project.load!
+
+        visualize(*arguments)
+      end
+
+      protected
 
       #
       # Default method which visualizes the DataMapper models, properties

@@ -74,6 +74,8 @@ module DataMapper
         end
       end
 
+      protected
+
       #
       # Generates a GraphViz diagram for a project.
       #

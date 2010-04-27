@@ -47,7 +47,7 @@ module DataMapper
             super do
               desc 'Generates a GraphViz diagram of the DataMapper Models'
               task :graphviz do
-                @graphviz.visualize(@output)
+                @graphviz.visualize!(@output)
               end
             end
           end
