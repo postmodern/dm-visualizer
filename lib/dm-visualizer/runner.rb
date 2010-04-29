@@ -15,13 +15,14 @@ module DataMapper
         method_option :full_names, :type => :boolean
       end
 
-      desc 'graphviz PATH', 'Generates a GraphViz diagram'
+      desc 'graphviz', 'Generates a GraphViz diagram'
       common_options
+      method_option :file, :type => :string, :aliases => '-f'
       method_option :format, :type => :string, :aliases => '-F'
       method_option :colors, :type => :hash
       method_option :labels, :type => :hash
-      def graphviz(path)
-        DataMapper::Visualizer::GraphViz.new(options).visualize!(path)
+      def graphviz
+        DataMapper::Visualizer::GraphViz.new(options).visualize!
       end
 
     end

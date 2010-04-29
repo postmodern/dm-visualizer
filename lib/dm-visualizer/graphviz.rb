@@ -16,6 +16,9 @@ module DataMapper
     #
     class GraphViz < Visualization
 
+      # The output file
+      attr_accessor :file
+
       # The output file format (`:png`)
       attr_accessor :format
 
@@ -30,6 +33,9 @@ module DataMapper
       #
       # @param [Hash] options
       #   Additional options.
+      #
+      # @option options [String] :file
+      #   The output file path.
       #
       # @option options [Symbol] :format (:png)
       #   The format of the generated graph.
@@ -57,6 +63,10 @@ module DataMapper
           :one_to_one => '1:1'
         }
 
+        if options[:file]
+          @file = File.expand_path(file)
+        end
+
         if options[:format]
           @format = options[:format].to_sym
         end
@@ -82,7 +92,7 @@ module DataMapper
       # @param [String] path
       #   The path to save the graph image to.
       #
-      def visualize(path)
+      def visualize
         graph = ::GraphViz.new(:G, :type => :digraph)
 
         # Create node for each model
@@ -140,7 +150,7 @@ module DataMapper
           )
         end
 
-        graph.output(@format => path)
+        graph.output(@format => @file)
       end
 
     end
