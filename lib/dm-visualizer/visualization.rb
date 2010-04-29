@@ -22,8 +22,9 @@ module DataMapper
       # Mapping of DataMapper repository names and their actual names.
       attr_reader :repository_names
 
-      # Specifies which naming style to use (`:ruby` or `:sql`).
-      attr_accessor :style
+      # Specifies which naming convention to use
+      # (`:relational` or `:schema`).
+      attr_accessor :naming
 
       # Specifies whether to demodulize class names.
       attr_accessor :full_names
@@ -40,8 +41,9 @@ module DataMapper
       # @option options [String] :repository_name
       #   The actual name to use for the `:default` DataMappe repository.
       #
-      # @option options [Symbol] :style
-      #   The naming style to use. May be either `:ruby` or `:sql`.
+      # @option options [Symbol] :naming
+      #   The naming convention to use. May be either `:relational` or
+      #   `:schema`.
       #
       # @option options [Boolean] :full_names
       #   Specifies whether to demodulize class names.
@@ -50,7 +52,7 @@ module DataMapper
         @project = Project.new(options)
 
         @repository_names = {}
-        @style = :ruby
+        @naming = :relational
         @full_names = false
 
         if options[:repository_names]
@@ -63,8 +65,8 @@ module DataMapper
           @database_names[:default] = options[:repository_name].to_s
         end
 
-        if options[:style]
-          @style = options[:style].to_sym
+        if options[:naming]
+          @naming = options[:naming].to_sym
         end
 
         if options.has_key?(:full_names)
@@ -118,7 +120,7 @@ module DataMapper
       def foreign_key_name(key)
         key = key.to_s
 
-        key.chomp!('_id') unless @style == :sql
+        key.chomp!('_id') unless @naming == :schema
         return key
       end
 
@@ -158,7 +160,7 @@ module DataMapper
       #   The name of the model.
       #
       def model_name(model)
-        if @style == :sql
+        if @naming == :schema
           name = model_repository_name(model)
           storage_name = model.storage_names[:default]
           storage_name ||= NamingConventions::Resource::UnderscoredAndPluralized.call(model.name)
