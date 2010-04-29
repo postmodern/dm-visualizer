@@ -10,6 +10,15 @@ module DataMapper
     #
     class Project
 
+      # Default options for various types of projects
+      PROJECT_OPTIONS = {
+        :gem => {
+          :include => ['ext', 'lib'],
+          :bundle => [:runtime]
+        },
+        :rails => {}
+      }
+
       # The directories to include
       attr_reader :include_dirs
 
@@ -28,6 +37,9 @@ module DataMapper
       # @param [Hash] options
       #   Additional options.
       #
+      # @option options [Symbol] :type
+      #   The type of the project, either `:gem` or `:rails`.
+      #
       # @option options [Array] :include
       #   The directories to include into the `$LOAD_PATH` global variable.
       #
@@ -45,6 +57,14 @@ module DataMapper
         @bundle = Set[]
         @require_paths = Set[]
         @require_globs = Set[]
+
+        if options[:type]
+          type = options[:type].to_sym
+
+          if PROJECT_OPTIONS.has_key?(type)
+            options = options.merge(PROJECT_OPTIONS[type])
+          end
+        end
 
         if options[:include]
           options[:include].each do |dir|
