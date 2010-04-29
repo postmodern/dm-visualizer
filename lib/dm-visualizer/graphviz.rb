@@ -84,6 +84,16 @@ module DataMapper
         end
       end
 
+      #
+      # The full output path.
+      #
+      # @return [String]
+      #   The full output path, including file extension.
+      #
+      def path
+        "#{@file}.#{@format}"
+      end
+
       protected
 
       #
@@ -150,7 +160,7 @@ module DataMapper
           )
         end
 
-        graph.output(@format => @file)
+        graph.output(@format => self.path)
       end
 
     end
