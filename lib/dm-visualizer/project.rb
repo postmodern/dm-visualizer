@@ -11,7 +11,7 @@ module DataMapper
     class Project
 
       # Specifies which Bundler groups to activate.
-      attr_accessor :bundle
+      attr_reader :bundle
 
       # The directories to include
       attr_reader :include_dirs
