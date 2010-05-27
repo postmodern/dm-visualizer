@@ -5,10 +5,6 @@ module DataMapper
     module Rake
       module Rails
         class Task < ::Rake::TaskLib
-          # The default options to pass to a new {Visualization}
-          DEFAULT_OPTIONS = {
-            :bundle => false
-          }
 
           #
           # Creates a new task.
