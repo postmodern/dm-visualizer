@@ -10,20 +10,11 @@ module DataMapper
     #
     class Project
 
-      # Default options for various types of projects
-      PROJECT_OPTIONS = {
-        :gem => {
-          :include => ['ext', 'lib'],
-          :bundle => [:runtime]
-        },
-        :rails => {}
-      }
+      # Specifies which Bundler groups to activate.
+      attr_accessor :bundle
 
       # The directories to include
       attr_reader :include_dirs
-
-      # Specifies which Bundler groups to activate.
-      attr_accessor :bundle
 
       # The paths to require
       attr_reader :require_paths
@@ -36,9 +27,6 @@ module DataMapper
       #
       # @param [Hash] options
       #   Additional options.
-      #
-      # @option options [Symbol] :type
-      #   The type of the project, either `:gem` or `:rails`.
       #
       # @option options [Array] :include
       #   The directories to include into the `$LOAD_PATH` global variable.
@@ -53,18 +41,10 @@ module DataMapper
       #   The path globs to require.
       #
       def initialize(options={})
+        @bundle = nil
         @include_dirs = Set[]
-        @bundle = Set[]
         @require_paths = Set[]
         @require_globs = Set[]
-
-        if options[:type]
-          type = options[:type].to_sym
-
-          if PROJECT_OPTIONS.has_key?(type)
-            options = options.merge(PROJECT_OPTIONS[type])
-          end
-        end
 
         if options[:include]
           options[:include].each do |dir|
@@ -73,6 +53,8 @@ module DataMapper
         end
 
         if options[:bundle]
+          @bundler = Set[]
+
           options[:bundle].each do |group|
             @bundle << group.to_sym
           end
@@ -126,7 +108,7 @@ module DataMapper
         end
 
         # use Bundler if a Gemfile is present
-        bundle! if File.file?('Gemfile')
+        bundle! if (@bundler && File.file?('Gemfile'))
 
         return true
       end
