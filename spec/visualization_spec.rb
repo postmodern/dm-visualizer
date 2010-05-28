@@ -49,13 +49,13 @@ describe DataMapper::Visualizer::Visualization do
     end
   end
 
-  describe "SQL style" do
+  describe "Schema naming convention" do
     before(:all) do
       @vis = DataMapper::Visualizer::Visualization.new(
         :include => [File.join(project_dir('library'),'lib')],
         :require => ['blog'],
         :repository_names => {:default => 'blogdb'},
-        :style => :sql
+        :naming => :schema
       )
     end
 
