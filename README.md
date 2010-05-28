@@ -16,22 +16,13 @@ DataMapper based Ruby project.
   * Provides Rake tasks for both Ruby libraries and Rails3 apps.
 * Supports both DataMapper 0.10.2 and 0.10.3.
 
-## Synopsis
-
-Visualize a library that uses DataMapper:
-
-    $ dm-visualizer graphviz doc/data_mapper.png -I lib -I ext -r library
-
-Visualize a Rails 3 project that is using dm-rails:
-
-    $ dm-visualizer graphviz doc/data_mapper.png -I lib . -R app/models/*.rb
-
 ## Examples
 
 Add the `dm:doc:graphviz` rake task to a Ruby library:
 
-    require 'dm-visualizer/rake/library/graphviz_task'
+    require 'dm-visualizer/rake/graphviz_task'
     DataMapper::Visualizer::Rake::Library::GraphVizTask.new(
+      :include => ['lib'],
       :require => ['my_library/models']
     )
 
@@ -42,6 +33,7 @@ Add the `db:doc:graphviz` rake task to a Rails3 / [dm-rails](http://github.com/d
 
 ## Requirements
 
+* ruby-graphviz >= 0.9.10
 * [dm-core](http://github.com/datamapper/dm-core) >= 0.10.2
 
 ## Install
