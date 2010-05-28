@@ -134,7 +134,7 @@ module DataMapper
       #   The property type name.
       #
       def property_type_name(property)
-        class_name(property.type)
+        class_name(property.type || property.class)
       end
 
       #
