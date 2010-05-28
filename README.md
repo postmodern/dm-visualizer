@@ -22,7 +22,7 @@ DataMapper based Ruby project.
 Add the `dm:doc:graphviz` rake task to a Ruby library:
 
     require 'dm-visualizer/rake/graphviz_task'
-    DataMapper::Visualizer::Rake::Library::GraphVizTask.new(
+    DataMapper::Visualizer::Rake::GraphVizTask.new(
       :include => ['lib'],
       :require => ['my_library/models']
     )
