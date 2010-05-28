@@ -53,7 +53,7 @@ module DataMapper
         end
 
         if options[:bundle]
-          @bundler = Set[]
+          @bundle = Set[]
 
           options[:bundle].each do |group|
             @bundle << group.to_sym
@@ -108,7 +108,7 @@ module DataMapper
         end
 
         # use Bundler if a Gemfile is present
-        bundle! if (@bundler && File.file?('Gemfile'))
+        bundle! if (@bundle && File.file?('Gemfile'))
 
         return true
       end
