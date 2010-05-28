@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "LICENSE.txt",
      "README.md",
      "Rakefile",
+     "VERSION",
      "dm-visualizer.gemspec",
      "lib/dm-visualizer.rb",
      "lib/dm-visualizer/graphviz.rb",
