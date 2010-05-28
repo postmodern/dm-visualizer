@@ -1,12 +1,10 @@
 require 'rubygems'
 require 'rake'
-require './lib/dm-visualizer/version.rb'
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = 'dm-visualizer'
-    gem.version = DataMapper::Visualizer::VERSION
     gem.license = 'MIT'
     gem.summary = %Q{Visualizes the Models, Properties and Relationships defined in a DataMapper based Ruby project.}
     gem.description = %Q{DataMapper Visualizer is both a library and a command-line utility for visualizing the Models, Properties and Relationships defined in a DataMapper based Ruby project.}

@@ -33,7 +33,6 @@ Gem::Specification.new do |s|
      "lib/dm-visualizer/rake/rails/graphviz_task.rb",
      "lib/dm-visualizer/rake/rails/tasks.rb",
      "lib/dm-visualizer/rake/task.rb",
-     "lib/dm-visualizer/version.rb",
      "lib/dm-visualizer/visualization.rb",
      "spec/dm_visualizer_spec.rb",
      "spec/helpers/project.rb",
