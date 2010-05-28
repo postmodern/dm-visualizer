@@ -41,7 +41,7 @@ module DataMapper
         end
 
         #
-        # Defines the `dm:doc:graphviz` task.
+        # Defines the `dm:doc:graphviz` namespace.
         #
         def define
           super do
