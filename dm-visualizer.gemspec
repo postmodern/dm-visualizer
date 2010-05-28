@@ -10,10 +10,8 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
   s.date = %q{2010-05-27}
-  s.default_executable = %q{dm-visualizer}
   s.description = %q{DataMapper Visualizer is both a library and a command-line utility for visualizing the Models, Properties and Relationships defined in a DataMapper based Ruby project.}
   s.email = %q{postmodern.mod3@gmail.com}
-  s.executables = ["dm-visualizer"]
   s.extra_rdoc_files = [
     "ChangeLog.md",
      "LICENSE.txt",
@@ -27,16 +25,13 @@ Gem::Specification.new do |s|
      "LICENSE.txt",
      "README.md",
      "Rakefile",
-     "bin/dm-visualizer",
      "dm-visualizer.gemspec",
      "lib/dm-visualizer.rb",
      "lib/dm-visualizer/graphviz.rb",
      "lib/dm-visualizer/project.rb",
      "lib/dm-visualizer/rake/graphviz_task.rb",
      "lib/dm-visualizer/rake/rails/graphviz_task.rb",
-     "lib/dm-visualizer/rake/rails/task.rb",
      "lib/dm-visualizer/rake/task.rb",
-     "lib/dm-visualizer/runner.rb",
      "lib/dm-visualizer/version.rb",
      "lib/dm-visualizer/visualization.rb",
      "spec/dm_visualizer_spec.rb",
