@@ -1,6 +1,7 @@
 # dm-visualizer
 
 * [github.com/postmodern/dm-visualizer](http://github.com/postmodern/dm-visualizer/)
+* [github.com/postmodern/dm-visualizer/issues](http://github.com/postmodern/dm-visualizer/issues)
 * Postmodern (postmodern.mod3 at gmail.com)
 
 ## Description
