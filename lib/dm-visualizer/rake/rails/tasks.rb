@@ -14,7 +14,7 @@ module DataMapper
             if arguments.first.kind_of?(Hash)
               super(*arguments)
             else
-              super(arguments.first => 'dm:load_models')
+              super(arguments.first => 'db:load_models')
             end
           end
         end
