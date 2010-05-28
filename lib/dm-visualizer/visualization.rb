@@ -179,7 +179,7 @@ module DataMapper
       # Loads the project and visualizes it.
       #
       # @param [Array] arguments
-      #   Additional arguments to pass to {visualize}.
+      #   Additional arguments to pass to {#visualize}.
       #
       def visualize!(*arguments)
         @project.load!
