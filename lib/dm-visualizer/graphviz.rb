@@ -64,7 +64,7 @@ module DataMapper
         }
 
         if options[:file]
-          @file = File.expand_path(file)
+          @file = File.expand_path(options[:file])
         end
 
         if options[:format]
