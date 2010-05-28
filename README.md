@@ -35,7 +35,7 @@ Add the `db:doc:graphviz` rake task to a Rails3 / [dm-rails](http://github.com/d
 
 ## Requirements
 
-* ruby-graphviz >= 0.9.10
+* [ruby-graphviz](http://rubygems.org/gems/ruby-graphviz) >= 0.9.10
 * [dm-core](http://github.com/datamapper/dm-core) >= 0.10.2
 
 ## Install
