@@ -1,6 +1,13 @@
 require 'rubygems'
+require 'bundler'
 
-gem 'rspec', '~> 1.3.0'
+begin
+  Bundler.setup(:runtime, :test)
+rescue Bundler::BundlerError => e
+  STDERR.puts e.message
+  STDERR.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
 
 require 'spec'
 require 'dm-visualizer/version'
