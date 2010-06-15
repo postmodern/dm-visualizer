@@ -9,67 +9,67 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-05-27}
+  s.date = %q{2010-06-15}
   s.description = %q{DataMapper Visualizer is both a library and a command-line utility for visualizing the Models, Properties and Relationships defined in a DataMapper based Ruby project.}
   s.email = %q{postmodern.mod3@gmail.com}
   s.extra_rdoc_files = [
     "ChangeLog.md",
-     "LICENSE.txt",
-     "README.md"
+    "LICENSE.txt",
+    "README.md"
   ]
   s.files = [
     ".gitignore",
-     ".specopts",
-     ".yardopts",
-     "ChangeLog.md",
-     "LICENSE.txt",
-     "README.md",
-     "Rakefile",
-     "VERSION",
-     "dm-visualizer.gemspec",
-     "lib/dm-visualizer.rb",
-     "lib/dm-visualizer/graphviz.rb",
-     "lib/dm-visualizer/project.rb",
-     "lib/dm-visualizer/rake/graphviz_task.rb",
-     "lib/dm-visualizer/rake/rails/graphviz_task.rb",
-     "lib/dm-visualizer/rake/rails/tasks.rb",
-     "lib/dm-visualizer/rake/task.rb",
-     "lib/dm-visualizer/visualization.rb",
-     "spec/dm_visualizer_spec.rb",
-     "spec/helpers/project.rb",
-     "spec/helpers/projects/library/lib/blog.rb",
-     "spec/helpers/projects/library/lib/blog/comment.rb",
-     "spec/helpers/projects/library/lib/blog/post.rb",
-     "spec/helpers/projects/library/lib/blog/user.rb",
-     "spec/helpers/projects/rails/app/models/comment.rb",
-     "spec/helpers/projects/rails/app/models/post.rb",
-     "spec/helpers/projects/rails/app/models/user.rb",
-     "spec/project_examples.rb",
-     "spec/project_spec.rb",
-     "spec/spec_helper.rb",
-     "spec/visualization_spec.rb"
+    ".specopts",
+    ".yardopts",
+    "ChangeLog.md",
+    "Gemfile",
+    "LICENSE.txt",
+    "README.md",
+    "Rakefile",
+    "VERSION",
+    "dm-visualizer.gemspec",
+    "lib/dm-visualizer.rb",
+    "lib/dm-visualizer/graphviz.rb",
+    "lib/dm-visualizer/project.rb",
+    "lib/dm-visualizer/rake/graphviz_task.rb",
+    "lib/dm-visualizer/rake/rails/graphviz_task.rb",
+    "lib/dm-visualizer/rake/rails/tasks.rb",
+    "lib/dm-visualizer/rake/task.rb",
+    "lib/dm-visualizer/visualization.rb",
+    "spec/dm_visualizer_spec.rb",
+    "spec/helpers/project.rb",
+    "spec/helpers/projects/library/lib/blog.rb",
+    "spec/helpers/projects/library/lib/blog/comment.rb",
+    "spec/helpers/projects/library/lib/blog/post.rb",
+    "spec/helpers/projects/library/lib/blog/user.rb",
+    "spec/helpers/projects/rails/app/models/comment.rb",
+    "spec/helpers/projects/rails/app/models/post.rb",
+    "spec/helpers/projects/rails/app/models/user.rb",
+    "spec/project_examples.rb",
+    "spec/project_spec.rb",
+    "spec/spec_helper.rb",
+    "spec/visualization_spec.rb"
   ]
   s.has_rdoc = %q{yard}
   s.homepage = %q{http://github.com/postmodern/dm-visualizer}
   s.licenses = ["MIT"]
-  s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Visualizes the Models, Properties and Relationships defined in a DataMapper based Ruby project.}
   s.test_files = [
+    "spec/dm_visualizer_spec.rb",
+    "spec/helpers/project.rb",
+    "spec/helpers/projects/library/lib/blog.rb",
+    "spec/helpers/projects/library/lib/blog/comment.rb",
+    "spec/helpers/projects/library/lib/blog/post.rb",
+    "spec/helpers/projects/library/lib/blog/user.rb",
+    "spec/helpers/projects/rails/app/models/comment.rb",
+    "spec/helpers/projects/rails/app/models/post.rb",
+    "spec/helpers/projects/rails/app/models/user.rb",
+    "spec/project_examples.rb",
     "spec/project_spec.rb",
-     "spec/spec_helper.rb",
-     "spec/visualization_spec.rb",
-     "spec/project_examples.rb",
-     "spec/helpers/project.rb",
-     "spec/helpers/projects/library/lib/blog.rb",
-     "spec/helpers/projects/library/lib/blog/post.rb",
-     "spec/helpers/projects/library/lib/blog/user.rb",
-     "spec/helpers/projects/library/lib/blog/comment.rb",
-     "spec/helpers/projects/rails/app/models/post.rb",
-     "spec/helpers/projects/rails/app/models/user.rb",
-     "spec/helpers/projects/rails/app/models/comment.rb",
-     "spec/dm_visualizer_spec.rb"
+    "spec/spec_helper.rb",
+    "spec/visualization_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -80,21 +80,24 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<ruby-graphviz>, [">= 0.9.10"])
       s.add_runtime_dependency(%q<dm-core>, [">= 0.10.2"])
       s.add_runtime_dependency(%q<thor>, [">= 0.13.4"])
+      s.add_development_dependency(%q<rake>, ["~> 0.8.7"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.4.0"])
       s.add_development_dependency(%q<rspec>, ["~> 1.3.0"])
-      s.add_development_dependency(%q<yard>, ["~> 0.5.3"])
     else
       s.add_dependency(%q<ruby-graphviz>, [">= 0.9.10"])
       s.add_dependency(%q<dm-core>, [">= 0.10.2"])
       s.add_dependency(%q<thor>, [">= 0.13.4"])
+      s.add_dependency(%q<rake>, ["~> 0.8.7"])
+      s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
       s.add_dependency(%q<rspec>, ["~> 1.3.0"])
-      s.add_dependency(%q<yard>, ["~> 0.5.3"])
     end
   else
     s.add_dependency(%q<ruby-graphviz>, [">= 0.9.10"])
     s.add_dependency(%q<dm-core>, [">= 0.10.2"])
     s.add_dependency(%q<thor>, [">= 0.13.4"])
+    s.add_dependency(%q<rake>, ["~> 0.8.7"])
+    s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
     s.add_dependency(%q<rspec>, ["~> 1.3.0"])
-    s.add_dependency(%q<yard>, ["~> 0.5.3"])
   end
 end
 
