@@ -111,8 +111,8 @@ module DataMapper
             "#{property_name(property)}: #{property_type_name(property)}"
           end
 
-          foreign_keys = project.each_foreign_key(model).map do |key,model|
-            "#{foreign_key_name(key)}: #{model_name(model)}"
+          foreign_keys = project.each_foreign_key(model).map do |key,value|
+            "#{foreign_key_name(key)}: #{model_name(value)}"
           end
 
           columns = (properties + foreign_keys)
