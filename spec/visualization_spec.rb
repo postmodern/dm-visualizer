@@ -23,7 +23,7 @@ describe DataMapper::Visualizer::Visualization do
     end
 
     it "should return the class names of Objects" do
-      @vis.class_name(Blog::Post.body).should == 'Property'
+      @vis.class_name(Blog::Post.body).should == 'Text'
     end
 
     it "should return the names of properties" do
@@ -82,7 +82,7 @@ describe DataMapper::Visualizer::Visualization do
     end
 
     it "should not demodulize property type names" do
-      @vis.property_type_name(Blog::Post.body).should == 'DataMapper::Types::Text'
+      @vis.property_type_name(Blog::Post.body).should =~ /::Text$/
     end
 
     it "should not demodulize model names" do
