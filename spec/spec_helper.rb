@@ -10,4 +10,3 @@ rescue Bundler::BundlerError => e
 end
 
 require 'spec'
-require 'dm-visualizer/version'
