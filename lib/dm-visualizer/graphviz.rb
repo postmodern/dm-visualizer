@@ -19,7 +19,7 @@ module DataMapper
       # The output file
       attr_accessor :file
 
-      # The output file format (`:png`)
+      # The output file format (`:svg`)
       attr_accessor :format
 
       # The colors to use
@@ -37,7 +37,7 @@ module DataMapper
       # @option options [String] :file
       #   The output file path.
       #
-      # @option options [Symbol] :format (:png)
+      # @option options [Symbol] :format (:svg)
       #   The format of the generated graph.
       #
       # @option options [Hash] :colors
@@ -51,7 +51,7 @@ module DataMapper
       def initialize(options={})
         super(options)
 
-        @format = :png
+        @format = :svg
 
         @colors = {
           :one_to_many => 'blue',
