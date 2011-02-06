@@ -5,7 +5,7 @@ module DataMapper
         module Tasks
           #
           # Overrides the Rake `task` method to make sure every defined
-          # task depends on `dm:load_models`.
+          # task depends on `environment`.
           #
           # @param [Array] arguments
           #   The arguments of the task.
@@ -14,7 +14,7 @@ module DataMapper
             if arguments.first.kind_of?(Hash)
               super(*arguments)
             else
-              super(arguments.first => 'db:load_models')
+              super(arguments.first => :environment)
             end
           end
         end
