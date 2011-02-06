@@ -27,12 +27,20 @@ module DataMapper
         # @see GraphViz.new
         #
         def initialize(options={})
-          @relational = GraphViz.new(options.merge(
+          common_options = {}
+
+          if File.file?('Gemfile')
+            common_options[:bundle] = true
+          end
+
+          common_options.merge!(options)
+
+          @relational = GraphViz.new(common_options.merge(
             :naming => :relational,
             :file => 'doc/relational_diagram'
           ))
 
-          @schema = GraphViz.new(options.merge(
+          @schema = GraphViz.new(common_options.merge(
             :naming => :schema,
             :file => 'doc/schema_diagram'
           ))
