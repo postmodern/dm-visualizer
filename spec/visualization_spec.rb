@@ -74,7 +74,9 @@ describe DataMapper::Visualizer::Visualization do
     end
 
     it "should not demodulize the names of Objects" do
-      @vis.class_name(Blog::Post.body).should == 'DataMapper::Property'
+      object = Blog::Post.new
+
+      @vis.class_name(object).should == 'Blog::Post'
     end
 
     it "should not demodulize property type names" do
