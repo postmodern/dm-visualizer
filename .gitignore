@@ -1,10 +1,5 @@
 doc
 pkg
-tmp/*
-.DS_Store
+Gemfile.lock
 .bundle
 .yardoc
-*.db
-*.log
-*.swp
-*~
