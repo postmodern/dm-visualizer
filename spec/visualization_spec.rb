@@ -6,10 +6,6 @@ require 'helpers/project'
 describe DataMapper::Visualizer::Visualization do
   include Helpers::Project
 
-  it "should detect which inflector DataMapper is using" do
-    DataMapper::Visualizer::Visualization::Inflector.should_not be_nil
-  end
-
   describe "defaults" do
     before(:all) do
       @vis = DataMapper::Visualizer::Visualization.new(
