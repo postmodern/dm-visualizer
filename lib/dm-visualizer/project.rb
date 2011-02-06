@@ -1,8 +1,6 @@
 require 'set'
 require 'dm-core'
 
-require 'enumerator'
-
 module DataMapper
   module Visualizer
     #
@@ -198,9 +196,7 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_model_inheritence
-        unless block_given?
-          return Enumerator.new(self,:each_model_inheritence)
-        end
+        return enum_for(:each_model_inheritence) unless block_given?
 
         each_model do |model|
           direct_ancestor = model.ancestors[1]
@@ -228,9 +224,7 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_property(model)
-        unless block_given?
-          return Enumerator.new(self,:each_property,model)
-        end
+        return enum_for(:each_property,model) unless block_given?
 
         model.properties.each do |property|
           yield property
@@ -257,9 +251,7 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_foreign_key(model)
-        unless block_given?
-          return Enumerator.new(self,:each_foreign_key,model)
-        end
+        return enum_for(:each_foreign_key,model) unless block_given?
 
         model.relationships.each_value do |relationship|
           next if relationship.respond_to?(:through)
@@ -290,7 +282,7 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_relationship
-        return Enumerator.new(self,:each_relationship) unless block_given?
+        return enum_for(:each_relationship) unless block_given?
 
         each_model do |model|
           model.relationships.each_value do |relationship|
