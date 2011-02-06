@@ -31,7 +31,7 @@ module DataMapper
       # @option options [Array] :include
       #   The directories to include into the `$LOAD_PATH` global variable.
       #
-      # @option options [Boolean, Array] :bundle
+      # @option options [Enumerable, Symbol, String, Boolean] :bundle
       #   Specifies which groups of dependencies to activate using Bundler.
       #
       # @option options [Array] :require
@@ -41,7 +41,7 @@ module DataMapper
       #   The path globs to require.
       #
       def initialize(options={})
-        @bundle = nil
+        @bundle = Set[]
         @include_dirs = Set[]
         @require_paths = Set[]
         @require_globs = Set[]
@@ -52,12 +52,15 @@ module DataMapper
           end
         end
 
-        if options[:bundle]
-          @bundle = Set[]
-
+        case options[:bundle]
+        when String, Symbol
+          @bundle << options[:bundle].to_sym
+        when Enumerable
           options[:bundle].each do |group|
             @bundle << group.to_sym
           end
+        when true
+          @bundle << :default
         end
 
         if options[:require]
@@ -108,7 +111,7 @@ module DataMapper
         end
 
         # use Bundler if a Gemfile is present
-        bundle! if (@bundle && File.file?('Gemfile'))
+        bundle! unless @bundle.empty?
 
         return true
       end
