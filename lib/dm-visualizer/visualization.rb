@@ -9,13 +9,6 @@ module DataMapper
     #
     class Visualization
 
-      # The inflector to use
-      Inflector = if Object.const_defined?('ActiveSupport')
-                    ActiveSupport::Inflector
-                  else
-                    Extlib::Inflection
-                  end
-
       # The project that will be visualized
       attr_reader :project
 
@@ -90,7 +83,7 @@ module DataMapper
                  obj.class.name
                end
 
-        name = Inflector.demodulize(name) unless @full_names
+        name = DataMapper::Inflector.demodulize(name) unless @full_names
 
         return name
       end
