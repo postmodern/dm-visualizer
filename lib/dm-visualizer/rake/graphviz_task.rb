@@ -7,16 +7,16 @@ module DataMapper
       class GraphVizTask < Task
 
         # The types of GraphViz diagrams
-        TYPES = Set[:relational, :schema]
+        DIAGRAMS = Set[:relational, :schema]
 
-        # The formats of GraphViz diagrams
+        # The image formats for GraphViz diagrams
         FORMATS = Set[:png, :svg]
 
-        # The relational diagram GraphViz visualizer
-        attr_reader :relational
+        # The types of diagrams to generate
+        attr_reader :diagrams
 
-        # The schema diagram GraphViz visualizer
-        attr_reader :schema
+        # The image formats to generate
+        attr_reader :formats
 
         #
         # Creates a new `dm:doc:graphviz` task.
@@ -44,7 +44,7 @@ module DataMapper
         #
         # @see GraphViz.new
         #
-        def initialize(options={})
+        def initialize(options={},&block)
           extract_options = lambda { |keys|
             if keys.any? { |key| options[key] }
               keys.select { |key| options.delete(key) }
@@ -53,10 +53,10 @@ module DataMapper
             end
           }
 
-          @types = extract_options[TYPES]
+          @diagrams = extract_options[DIAGRAMS]
           @formats = extract_options[FORMATS]
 
-          super(options)
+          super(options,&block)
         end
 
         #
@@ -73,7 +73,7 @@ module DataMapper
 
           super do
             namespace(:graphviz) do
-              @types.each do |type|
+              @diagrams.each do |type|
                 namespace(type) do
                   @formats.each do |format|
                     desc "Generates a #{format.to_s.upcase} GraphViz #{type} diagram of the DataMapper Models"
@@ -87,7 +87,7 @@ module DataMapper
               end
             end
 
-            task(:graphviz => @types.map { |type| "graphviz:#{type}" })
+            task(:graphviz => @diagrams.map { |type| "graphviz:#{type}" })
           end
         end
 
