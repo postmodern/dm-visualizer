@@ -6,6 +6,12 @@ module DataMapper
     module Rake
       class GraphVizTask < Task
 
+        # The types of GraphViz diagrams
+        TYPES = Set[:relational, :schema]
+
+        # The formats of GraphViz diagrams
+        FORMATS = Set[:png, :svg]
+
         # The relational diagram GraphViz visualizer
         attr_reader :relational
 
@@ -27,28 +33,20 @@ module DataMapper
         # @see GraphViz.new
         #
         def initialize(options={})
-          common_options = {:bundle => File.file?('Gemfile')}
-          common_options.merge!(options)
-
-          graphviz = lambda { |type,format|
-            GraphViz.new(common_options.merge(
-              :naming => type,
-              :file => "doc/#{type}_diagram",
-              :format => format
-            ))
+          extract_options = lambda { |keys|
+            if keys.any? { |key| options[key] }
+              keys.select { |key| options.delete(key) }
+            else
+              keys
+            end
           }
 
-          @graphviz = {
-            :relational => {
-              :png => graphviz[:relational, :png],
-              :svg => graphviz[:relational, :svg]
-            },
+          @types = extract_options[TYPES]
+          @formats = extract_options[FORMATS]
 
-            :schema => {
-              :png => graphviz[:schema, :png],
-              :svg => graphviz[:schema, :svg]
-            }
-          }
+          @options = options.merge(
+            :bundle => File.file?('Gemfile')
+          )
 
           super
         end
@@ -57,38 +55,31 @@ module DataMapper
         # Defines the `dm:doc:graphviz` namespace.
         #
         def define
+          graphviz = lambda { |type,format|
+            GraphViz.new(@options.merge(
+              :naming => type,
+              :file => "doc/#{type}_diagram",
+              :format => format
+            ))
+          }
+
           super do
-            namespace :graphviz do
-              namespace :relational do
-                desc 'Generates a PNG GraphViz relational diagram of the DataMapper Models'
-                task :png do
-                  @graphviz[:relational][:png].visualize!
+            namespace(:graphviz) do
+              @types.each do |type|
+                namespace(type) do
+                  @formats.each do |format|
+                    desc "Generates a #{format.to_s.upcase} GraphViz #{type} diagram of the DataMapper Models"
+                    task(format) do
+                      graphviz[type, format].visualize!
+                    end
+                  end
                 end
 
-                desc 'Generates a SVG GraphViz relational diagram of the DataMapper Models'
-                task :svg do
-                  @graphviz[:relational][:svg].visualize!
-                end
+                task(type => @formats.map { |format| "#{type}:#{format}" })
               end
-
-              task :relational => ['relational:png', 'relational:svg']
-
-              namespace :schema do
-                desc 'Generates a PNG GraphViz schema diagram of the DataMapper Models'
-                task :png do
-                  @graphviz[:schema][:png].visualize!
-                end
-
-                desc 'Generates a SVG GraphViz schema diagram of the DataMapper Models'
-                task :svg do
-                  @graphviz[:schema][:svg].visualize!
-                end
-              end
-
-              task :schema => ['schema:png', 'schema:svg']
             end
 
-            task :graphviz => ['graphviz:relational', 'graphviz:schema']
+            task(:graphviz => @types.map { |type| "graphviz:#{type}" })
           end
         end
 
