@@ -27,23 +27,28 @@ module DataMapper
         # @see GraphViz.new
         #
         def initialize(options={})
-          common_options = {}
-
-          if File.file?('Gemfile')
-            common_options[:bundle] = true
-          end
-
+          common_options = {:bundle => File.file?('Gemfile')}
           common_options.merge!(options)
 
-          @relational = GraphViz.new(common_options.merge(
-            :naming => :relational,
-            :file => 'doc/relational_diagram'
-          ))
+          graphviz = lambda { |type,format|
+            GraphViz.new(common_options.merge(
+              :naming => type,
+              :file => "doc/#{type}_diagram",
+              :format => format
+            ))
+          }
 
-          @schema = GraphViz.new(common_options.merge(
-            :naming => :schema,
-            :file => 'doc/schema_diagram'
-          ))
+          @graphviz = {
+            :relational => {
+              :png => graphviz[:relational, :png],
+              :svg => graphviz[:relational, :svg]
+            },
+
+            :schema => {
+              :png => graphviz[:schema, :png],
+              :svg => graphviz[:schema, :svg]
+            }
+          }
 
           super
         end
@@ -54,15 +59,33 @@ module DataMapper
         def define
           super do
             namespace :graphviz do
-              desc 'Generates a GraphViz relational diagram of the DataMapper Models'
-              task :relational do
-                @relational.visualize!
+              namespace :relational do
+                desc 'Generates a PNG GraphViz relational diagram of the DataMapper Models'
+                task :png do
+                  @graphviz[:relational][:png].visualize!
+                end
+
+                desc 'Generates a SVG GraphViz relational diagram of the DataMapper Models'
+                task :svg do
+                  @graphviz[:relational][:svg].visualize!
+                end
               end
 
-              desc 'Generates a GraphViz schema diagram of the DataMapper Models'
-              task :schema do
-                @schema.visualize!
+              task :relational => ['relational:png', 'relational:svg']
+
+              namespace :schema do
+                desc 'Generates a PNG GraphViz schema diagram of the DataMapper Models'
+                task :png do
+                  @graphviz[:schema][:png].visualize!
+                end
+
+                desc 'Generates a SVG GraphViz schema diagram of the DataMapper Models'
+                task :svg do
+                  @graphviz[:schema][:svg].visualize!
+                end
               end
+
+              task :schema => ['schema:png', 'schema:svg']
             end
 
             task :graphviz => ['graphviz:relational', 'graphviz:schema']
