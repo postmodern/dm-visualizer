@@ -226,8 +226,18 @@ module DataMapper
       def each_property(model)
         return enum_for(:each_property,model) unless block_given?
 
+        foreign_keys = Set[]
+        
+        model.relationships.each_value do |relationship|
+          case relationship
+          when Associations::ManyToOne::Relationship,
+               Associations::OneToOne::Relationship
+            foreign_keys << relationship.child_key.name
+          end
+        end
+
         model.properties.each do |property|
-          yield property
+          yield property unless foreign_keys.include?(property.name)
         end
       end
 
