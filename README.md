@@ -44,5 +44,6 @@ Add the `db:doc:graphviz` rake task to a Rails3 / [dm-rails](http://github.com/d
 
 ## License
 
-See {file:LICENSE.txt} for license information.
+Copyright (c) 2010-2011 Hal Brodigan
 
+See {file:LICENSE.txt} for license information.
