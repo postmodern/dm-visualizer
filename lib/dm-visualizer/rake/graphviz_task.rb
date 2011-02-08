@@ -44,9 +44,10 @@ module DataMapper
           @types = extract_options[TYPES]
           @formats = extract_options[FORMATS]
 
-          @options = options.merge(
+          @options = {
             :bundle => File.file?('Gemfile')
-          )
+          }
+          @options.merge!(options)
 
           super
         end
