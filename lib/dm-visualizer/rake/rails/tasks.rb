@@ -4,6 +4,13 @@ module DataMapper
       module Rails
         module Tasks
           #
+          # Disables Bundler by default.
+          #
+          def initialize(options={},&block)
+            super({:bundle => false}.merge(options),&block)
+          end
+
+          #
           # Overrides the Rake `task` method to make sure every defined
           # task depends on `environment`.
           #
