@@ -16,7 +16,7 @@ DataMapper based Ruby project.
 * Supports using [Gem Bundler](http://gembundler.com/).
 * Generates GraphViz diagrams for a project.
   * Provides Rake tasks for both Ruby libraries and Rails3 apps.
-* Supports both DataMapper 0.10.2 and 1.0.0.
+* Supports DataMapper >= 1.0.0.
 
 ## Examples
 
@@ -36,7 +36,7 @@ Add the `db:doc:graphviz` rake task to a Rails3 / [dm-rails](http://github.com/d
 ## Requirements
 
 * [ruby-graphviz](http://rubygems.org/gems/ruby-graphviz) >= 0.9.10
-* [dm-core](http://github.com/datamapper/dm-core) ~> 1.0.0
+* [dm-core](http://github.com/datamapper/dm-core) >= 1.0.0
 
 ## Install
 
