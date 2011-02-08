@@ -24,6 +24,18 @@ module DataMapper
         # @param [Hash] options
         #   Additional options.
         #
+        # @option options [Boolean] :relational
+        #   Specifies whether to generate a relational diagram.
+        #
+        # @option options [Boolean] :schema
+        #   Specifies whether to generate a schema diagram.
+        #
+        # @option options [Boolean] :png
+        #   Specifies whether to generate a PNG image.
+        #
+        # @option options [Boolean] :svg
+        #   Specifies whether to generate a SVG image.
+        #
         # @yield [task]
         #   The given block will be passed the newly created task.
         #
