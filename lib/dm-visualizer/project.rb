@@ -232,7 +232,7 @@ module DataMapper
           case relationship
           when Associations::ManyToOne::Relationship,
                Associations::OneToOne::Relationship
-            foreign_keys << relationship.child_key.name
+            foreign_keys << relationship.child_key.first.name
           end
         end
 
