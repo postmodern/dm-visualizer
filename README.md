@@ -14,7 +14,9 @@ DataMapper based Ruby project.
 
 * Safely loads the models of a project.
 * Supports using [Gem Bundler](http://gembundler.com/).
-* Generates GraphViz diagrams for a project.
+* Generates GraphViz diagrams for a project:
+  * Supports Relational or Schema diagrams.
+  * Supports PNG and SVG output.
   * Provides Rake tasks for both Ruby libraries and Rails3 apps.
 * Supports DataMapper >= 1.0.0.
 
