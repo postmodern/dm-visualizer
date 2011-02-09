@@ -82,15 +82,15 @@ module DataMapper
 
         begin
           require 'bundler'
-        rescue LoadError => e
+        rescue LoadError
           log "Gemfile exists, but bundler is not installed"
           log "Run `gem install bundler` to install bundler."
         end
 
         begin
           Bundler.setup(*@bundle)
-        rescue Bundler::BundleError => e
-          log e.message
+        rescue Bundler::BundleError => error
+          log error.message
           log "Run `bundle install` to install missing gems"
         end
 
@@ -136,9 +136,9 @@ module DataMapper
         @require_paths.each do |path|
           begin
             require path
-          rescue LoadError => e
+          rescue LoadError => error
             log "dm-visualizer: unable to load #{path}"
-            log "dm-visualizer: #{e.message}"
+            log "dm-visualizer: #{error.message}"
           end
         end
 
@@ -149,9 +149,9 @@ module DataMapper
 
               begin
                 require relative_path
-              rescue LoadError => e
+              rescue LoadError => error
                 log "dm-visualizer: unable to load #{relative_path} from #{dir}"
-                log "dm-visualizer: #{e.message}"
+                log "dm-visualizer: #{error.message}"
               end
             end
           end
