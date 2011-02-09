@@ -227,15 +227,11 @@ module DataMapper
         return enum_for(:each_property,model) unless block_given?
 
         foreign_keys = Set[]
-        
-        model.relationships.each_value do |relationship|
-          case relationship
-          when Associations::ManyToOne::Relationship,
-               Associations::OneToOne::Relationship
-            foreign_keys << relationship.child_key.first.name
-          end
-        end
 
+        each_foreign_key(model) do |name,parent_model|
+          foreign_keys << name
+        end
+        
         model.properties.each do |property|
           yield property unless foreign_keys.include?(property.name)
         end
@@ -263,7 +259,12 @@ module DataMapper
       def each_foreign_key(model)
         return enum_for(:each_foreign_key,model) unless block_given?
 
-        model.relationships.each_value do |relationship|
+        # XXX: in dm-core 1.1.0, `Model#relationships` returns a
+        # `DataMapper::RelationshipSet`, instead of a `Mash`, which does
+        # not provide the `each_value` method.
+        model.relationships.each do |*args|
+          relationship = args.last
+
           next if relationship.respond_to?(:through)
 
           case relationship
@@ -295,7 +296,12 @@ module DataMapper
         return enum_for(:each_relationship) unless block_given?
 
         each_model do |model|
-          model.relationships.each_value do |relationship|
+          # XXX: in dm-core 1.1.0, `Model#relationships` returns a
+          # `DataMapper::RelationshipSet`, instead of a `Mash`, which does
+          # not provide the `each_value` method.
+          model.relationships.each do |*args|
+            relationship = args.last
+
             unless relationship.respond_to?(:through)
               yield relationship, model
             end
