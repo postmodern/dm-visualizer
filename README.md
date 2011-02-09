@@ -15,14 +15,14 @@ DataMapper based Ruby project.
 * Safely loads the models of a project.
 * Supports using [Gem Bundler](http://gembundler.com/).
 * Generates GraphViz diagrams for a project:
-  * Supports Relational or Schema diagrams.
-  * Supports PNG and SVG output.
-  * Provides Rake tasks for both Ruby libraries and Rails3 apps.
+  * Supports generating Relational and Schema diagrams.
+  * Provides PNG and SVG output.
+  * Provides Rake tasks for both Ruby libraries and dm-rails apps.
 * Supports DataMapper >= 1.0.0.
 
 ## Examples
 
-Add the `dm:doc:graphviz` rake task to a Ruby library:
+Add the `dm:doc:graphviz` rake tasks to a Ruby library:
 
     require 'dm-visualizer/rake/graphviz_task'
     DataMapper::Visualizer::Rake::GraphVizTask.new(
@@ -30,7 +30,7 @@ Add the `dm:doc:graphviz` rake task to a Ruby library:
       :require => ['my_library/models']
     )
 
-Add the `db:doc:graphviz` rake task to a Rails3 / [dm-rails](http://github.com/datamapper/dm-rails) app:
+Add the `db:doc:graphviz` rake tasks to a [dm-rails](http://github.com/datamapper/dm-rails) app:
 
     require 'dm-visualizer/rake/rails/graphviz_task'
     DataMapper::Visualizer::Rake::Rails::GraphVizTask.new
