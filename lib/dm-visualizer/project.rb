@@ -208,36 +208,6 @@ module DataMapper
       end
 
       #
-      # Enumerates over each DataMapper property from a given model.
-      #
-      # @param [DataMapper::Model] model
-      #   The given model.
-      #
-      # @yield [property]
-      #   The given block will be passed every property from the given
-      #   model.
-      #
-      # @yieldparam [DataMapper::Property] property
-      #   The property.
-      #
-      # @return [Enumerator]
-      #   If no block is given, an Enumerator object will be returned.
-      #
-      def each_property(model)
-        return enum_for(:each_property,model) unless block_given?
-
-        foreign_keys = Set[]
-
-        each_foreign_key(model) do |name,parent_model|
-          foreign_keys << name
-        end
-        
-        model.properties.each do |property|
-          yield property unless foreign_keys.include?(property.name)
-        end
-      end
-
-      #
       # Enumerates over every foreign-key in a given model.
       #
       # @param [DataMapper::Model] model
@@ -273,6 +243,36 @@ module DataMapper
             yield relationship.child_key.first.name,
                   relationship.parent_model
           end
+        end
+      end
+
+      #
+      # Enumerates over each DataMapper property from a given model.
+      #
+      # @param [DataMapper::Model] model
+      #   The given model.
+      #
+      # @yield [property]
+      #   The given block will be passed every property from the given
+      #   model.
+      #
+      # @yieldparam [DataMapper::Property] property
+      #   The property.
+      #
+      # @return [Enumerator]
+      #   If no block is given, an Enumerator object will be returned.
+      #
+      def each_property(model)
+        return enum_for(:each_property,model) unless block_given?
+
+        foreign_keys = Set[]
+
+        each_foreign_key(model) do |name,parent_model|
+          foreign_keys << name
+        end
+        
+        model.properties.each do |property|
+          yield property unless foreign_keys.include?(property.name)
         end
       end
 
