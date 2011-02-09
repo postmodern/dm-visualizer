@@ -1,3 +1,14 @@
+### 0.2.0 / 2011-02-09
+
+* Require dm-core >= 1.0.0.
+* {DataMapper::Visualizer::Rake::GraphVizTask} now defines tasks for
+  generating Relational and Schema diagrams, with PNG and SVG output.
+* Fixed a bug in {DataMapper::Visualizer::Rake::Rails::Tasks} which
+  prevented dm-visualizer from working in newer dm-rails applications.
+* Filter-out foreign-key columns in
+  {DataMapper::Visualizer::Project#each_property}.
+* Tested against dm-core 1.0.2 and 1.1.0.
+
 ### 0.1.0 / 2010-05-27
 
 * Initial release:
