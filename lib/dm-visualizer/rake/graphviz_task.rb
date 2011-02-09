@@ -1,21 +1,23 @@
 require 'dm-visualizer/rake/task'
 require 'dm-visualizer/graphviz'
 
+require 'set'
+
 module DataMapper
   module Visualizer
     module Rake
       class GraphVizTask < Task
 
-        # The types of GraphViz diagrams
+        # The types of GraphViz diagrams.
         DIAGRAMS = Set[:relational, :schema]
 
-        # The image formats for GraphViz diagrams
+        # The image formats for GraphViz diagrams.
         FORMATS = Set[:png, :svg]
 
-        # The types of diagrams to generate
+        # The types of diagrams to generate.
         attr_reader :diagrams
 
-        # The image formats to generate
+        # The formats of the diagrams to generate.
         attr_reader :formats
 
         #
