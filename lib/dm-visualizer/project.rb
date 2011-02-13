@@ -232,11 +232,7 @@ module DataMapper
         # XXX: in dm-core 1.1.0, `Model#relationships` returns a
         # `DataMapper::RelationshipSet`, instead of a `Mash`, which does
         # not provide the `each_value` method.
-        model.relationships.each do |args|
-          relationship = args.last
-
-          next if relationship.respond_to?(:through)
-
+        each_relationship_for(model) do |relationship|
           case relationship
           when Associations::ManyToOne::Relationship,
                Associations::OneToOne::Relationship
@@ -296,15 +292,8 @@ module DataMapper
         return enum_for(:each_relationship) unless block_given?
 
         each_model do |model|
-          # XXX: in dm-core 1.1.0, `Model#relationships` returns a
-          # `DataMapper::RelationshipSet`, instead of a `Mash`, which does
-          # not provide the `each_value` method.
-          model.relationships.each do |args|
-            relationship = args.last
-
-            unless relationship.respond_to?(:through)
-              yield relationship, model
-            end
+          each_relationship_for(model) do |relationship|
+            yield relationship, model
           end
         end
       end
@@ -319,6 +308,35 @@ module DataMapper
       #
       def log(message)
         STDERR.puts "dm-visualizer: #{message}"
+      end
+
+      #
+      # Enumerates over each DataMapper relationship in a model.
+      #
+      # @yield [relationship]
+      #   The given block will be passed each relationship in the model.
+      #
+      # @yieldparam [DataMapper::Relationship] relationship
+      #   A relationship.
+      #
+      # @since 0.2.1
+      #
+      def each_relationship_for(model)
+        # XXX: in dm-core 1.1.0, `Model#relationships` returns a
+        # `DataMapper::RelationshipSet`, instead of a `Mash`, which does
+        # not provide the `each_value` method.
+        model.relationships.each do |args|
+          relationship = case args
+                         when Array
+                           args.last
+                         else
+                           args
+                         end
+
+          unless relationship.respond_to?(:through)
+            yield relationship
+          end
+        end
       end
 
     end
