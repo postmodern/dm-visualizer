@@ -1,3 +1,9 @@
+### 0.2.1 / 2011-02-12
+
+* Added {DataMapper::Visualizer::Project#each_relationship_for}.
+* Fixed a bug in {DataMapper::Visualizer::Project#each_relationship},
+  effecting dm-core 1.0.x projects.
+
 ### 0.2.0 / 2011-02-09
 
 * Require dm-core >= 1.0.0.
