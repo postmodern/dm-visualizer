@@ -232,7 +232,7 @@ module DataMapper
         # XXX: in dm-core 1.1.0, `Model#relationships` returns a
         # `DataMapper::RelationshipSet`, instead of a `Mash`, which does
         # not provide the `each_value` method.
-        model.relationships.each do |*args|
+        model.relationships.each do |args|
           relationship = args.last
 
           next if relationship.respond_to?(:through)
@@ -299,7 +299,7 @@ module DataMapper
           # XXX: in dm-core 1.1.0, `Model#relationships` returns a
           # `DataMapper::RelationshipSet`, instead of a `Mash`, which does
           # not provide the `each_value` method.
-          model.relationships.each do |*args|
+          model.relationships.each do |args|
             relationship = args.last
 
             unless relationship.respond_to?(:through)
