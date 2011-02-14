@@ -15,7 +15,7 @@ homepage: http://github.com/postmodern/dm-visualizer
 has_yard: true
 
 dependencies:
-  ruby-graphviz: >= 0.9.10
+  ruby-graphviz: ~> 0.9.10
   dm-core: ~> 1.0
 
 development_dependencies:
