@@ -7,5 +7,5 @@ group(:development) do
   gem 'kramdown',     '~> 0.12.0'
 
   gem 'ore-tasks',	  '~> 0.4'
-  gem 'rspec',        '~> 2.4.0'
+  gem 'rspec',        '~> 2.4'
 end
