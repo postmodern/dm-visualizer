@@ -5,7 +5,7 @@ begin
 rescue Gem::LoadError => e
   raise(e)
 rescue ::LoadError
-  STDERR.puts "GraphViz not available. Install it with: gem install ruby-graphviz"
+  warn "GraphViz not available. Install it with: gem install ruby-graphviz"
 end
 
 module DataMapper

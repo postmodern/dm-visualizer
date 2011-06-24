@@ -307,7 +307,7 @@ module DataMapper
       #   The message to print.
       #
       def log(message)
-        STDERR.puts "dm-visualizer: #{message}"
+        warn "dm-visualizer: #{message}"
       end
 
       #
