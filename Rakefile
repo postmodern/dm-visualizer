@@ -3,7 +3,7 @@ require 'bundler'
 
 begin
   Bundler.setup(:development, :doc)
-rescue Bundler::BundlerError => e
+rescue Exception => e
   warn e.message
   warn "Run `bundle install` to install missing gems"
   exit e.status_code
