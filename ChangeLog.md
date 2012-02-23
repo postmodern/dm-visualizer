@@ -1,3 +1,8 @@
+### 0.2.2 / To be released
+
+* Update ruby-graphviz to 1.0.5
+* Make compatible with newer versions of Bundler
+
 ### 0.2.1 / 2011-02-12
 
 * Added {DataMapper::Visualizer::Project#each_relationship_for}.
