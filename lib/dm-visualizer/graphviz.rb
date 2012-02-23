@@ -118,7 +118,7 @@ module DataMapper
           columns = (properties + foreign_keys)
           label = "{ #{model_name(model)} | #{columns.join("\n")} }"
 
-          graph.add_node(
+          graph.add_nodes(
             model_name(model),
             :shape => 'record',
             :label => label
@@ -132,14 +132,14 @@ module DataMapper
 
           case relationship
           when DataMapper::Associations::OneToMany::Relationship
-            graph.add_edge(
+            graph.add_edges(
               source_node,
               target_node,
               :color => @colors[:one_to_many],
               :label => " #{@labels[:one_to_many]}"
             )
           when DataMapper::Associations::OneToOne::Relationship
-            graph.add_edge(
+            graph.add_edges(
               source_node,
               target_node,
               :color => @colors[:one_to_one],
@@ -153,7 +153,7 @@ module DataMapper
           source_node = graph.get_node(model_name(ancestor))
           target_node = graph.get_node(model_name(model))
 
-          graph.add_edge(
+          graph.add_edges(
             source_node,
             target_node,
             :color => @colors[:inheritence]
