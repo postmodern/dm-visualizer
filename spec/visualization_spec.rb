@@ -4,8 +4,6 @@ require 'spec_helper'
 require 'helpers/project'
 
 describe DataMapper::Visualizer::Visualization do
-  include Helpers::Project
-
   describe "defaults" do
     before(:all) do
       @vis = DataMapper::Visualizer::Visualization.new(

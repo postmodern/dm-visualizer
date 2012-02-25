@@ -1,12 +1,9 @@
 require 'dm-visualizer/project'
 
 require 'spec_helper'
-require 'helpers/project'
 require 'project_examples'
 
 describe DataMapper::Visualizer::Project do
-  include Helpers::Project
-
   context "library" do
     before(:all) do
       @dir = project_dir('library')
