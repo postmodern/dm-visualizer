@@ -19,5 +19,5 @@ dependencies:
   dm-core: ~> 1.0
 
 development_dependencies:
-  bundler: ~> 1.0.0
-  yard: ~> 0.6.0
+  bundler: ~> 1.0
+  yard: ~> 0.6
