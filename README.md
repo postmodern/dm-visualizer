@@ -1,7 +1,7 @@
 # dm-visualizer
 
-* [Source](http://github.com/postmodern/dm-visualizer/)
-* [Issues](http://github.com/postmodern/dm-visualizer/issues)
+* [Source](https://github.com/postmodern/dm-visualizer/)
+* [Issues](https://github.com/postmodern/dm-visualizer/issues)
 * [Documentation](http://rubydoc.info/gems/dm-visualizer/frames)
 * [Email](postmodern.mod3 at gmail.com)
 
