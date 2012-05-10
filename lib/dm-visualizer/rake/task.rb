@@ -38,6 +38,8 @@ module DataMapper
           namespace :dm do
             namespace(:doc,&block)
           end
+
+          task 'db:doc' => 'dm:doc'
         end
 
       end
