@@ -43,7 +43,7 @@ Add the `dm:doc:graphviz` rake tasks to a [dm-rails](http://github.com/datamappe
 
 ## Install
 
-    $ sudo gem install dm-visualizer
+    $ gem install dm-visualizer
 
 ## License
 
