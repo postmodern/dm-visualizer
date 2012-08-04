@@ -21,9 +21,7 @@ module DataMapper
         #   The new Task.
         #
         def initialize(options={})
-          @options = {
-            :bundle => File.file?('Gemfile')
-          }
+          @options = {:bundle => File.file?('Gemfile')}
           @options.merge!(options)
 
           yield self if block_given?

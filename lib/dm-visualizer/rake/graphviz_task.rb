@@ -56,7 +56,7 @@ module DataMapper
           }
 
           @diagrams = extract_options[DIAGRAMS]
-          @formats = extract_options[FORMATS]
+          @formats  = extract_options[FORMATS]
 
           super(options,&block)
         end
