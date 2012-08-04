@@ -3,7 +3,7 @@
 * [Source](https://github.com/postmodern/dm-visualizer/)
 * [Issues](https://github.com/postmodern/dm-visualizer/issues)
 * [Documentation](http://rubydoc.info/gems/dm-visualizer/frames)
-* [Email](postmodern.mod3 at gmail.com)
+* [Email](mailto:postmodern.mod3 at gmail.com)
 
 ## Description
 
