@@ -1,4 +1,4 @@
-require 'rake'
+require 'rake/tasklib'
 
 module DataMapper
   module Visualizer
