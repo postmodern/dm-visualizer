@@ -88,7 +88,7 @@ module DataMapper
         end
 
         begin
-          Bundler.setup(*@bundle)
+          Bundler.require(*@bundle)
         rescue Bundler::BundleError => error
           log error.message
           log "Run `bundle install` to install missing gems"
