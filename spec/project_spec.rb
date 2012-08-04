@@ -1,14 +1,15 @@
-require 'dm-visualizer/project'
-
 require 'spec_helper'
 require 'project_examples'
 
+require 'dm-visualizer/project'
+
 describe DataMapper::Visualizer::Project do
   context "library" do
-    before(:all) do
-      @dir = project_dir('library')
-      @project = DataMapper::Visualizer::Project.new(
-        :include => [File.join(@dir,'lib')],
+    let(:dir) { project_dir('library') }
+
+    subject do
+      described_class.new(
+        :include => [File.join(dir,'lib')],
         :require => ['blog']
       )
     end
@@ -16,17 +17,18 @@ describe DataMapper::Visualizer::Project do
     it_should_behave_like "a Ruby project"
 
     it "should require the specified paths" do
-      @project.load!
+      subject.load!
 
-      Object.const_defined?('Blog').should == true
+      Object.should be_const_defined('Blog')
     end
   end
 
   context "rails" do
-    before(:all) do
-      @dir = project_dir('rails')
-      @project = DataMapper::Visualizer::Project.new(
-        :include => [@dir],
+    let(:dir) { project_dir('rails') }
+
+    subject do
+      described_class.new(
+        :include     => [dir],
         :require_all => ['app/models/*.rb']
       )
     end
@@ -34,11 +36,11 @@ describe DataMapper::Visualizer::Project do
     it_should_behave_like "a Ruby project"
 
     it "should require all paths that match the specified glob patterns" do
-      @project.load!
+      subject.load!
 
-      Object.const_defined?('User').should == true
-      Object.const_defined?('Post').should == true
-      Object.const_defined?('Comment').should == true
+      Object.should be_const_defined('User')
+      Object.should be_const_defined('Post')
+      Object.should be_const_defined('Comment')
     end
   end
 end
