@@ -1,3 +1,12 @@
+### 0.2.2 / 2012-08-03
+
+* Relax version requirements for dependencies.
+* Fixed ruby-graphviz deprecation warnings (thanks Martin Mauch).
+* Use `Bundler.require` instead of `Bundler.setup`.
+* Require `rake/tasklib` instead of just `rake`.
+* Aliased the `db:doc` task to `dm:doc`.
+* Replaced ore-tasks with [rubygems-tasks](https://github.com/postmodern/rubygems-tasks#readme).
+
 ### 0.2.1 / 2011-02-12
 
 * Added {DataMapper::Visualizer::Project#each_relationship_for}.
