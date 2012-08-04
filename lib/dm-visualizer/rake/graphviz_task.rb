@@ -65,14 +65,6 @@ module DataMapper
         # Defines the `dm:doc:graphviz` namespace.
         #
         def define
-          graphviz = lambda { |type,format|
-            GraphViz.new(@options.merge(
-              :naming => type,
-              :file => "doc/#{type}_diagram",
-              :format => format
-            ))
-          }
-
           super do
             namespace(:graphviz) do
               @diagrams.each do |type|
@@ -80,7 +72,11 @@ module DataMapper
                   @formats.each do |format|
                     desc "Generates a #{format.to_s.upcase} GraphViz #{type} diagram of the DataMapper Models"
                     task(format) do
-                      graphviz[type, format].visualize!
+                      GraphViz.new(@options.merge(
+                        :naming => type,
+                        :file   => "doc/#{type}_diagram",
+                        :format => format
+                      )).visualize!
                     end
                   end
                 end
