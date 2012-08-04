@@ -44,9 +44,10 @@ module DataMapper
       def initialize(options={})
         @project = Project.new(options)
 
-        @repository_names = {}
-        @naming = :relational
+        @naming     = :relational
         @full_names = false
+
+        @repository_names = {}
 
         if options[:repository_names]
           options[:repository_names].each do |name,db_name|
@@ -84,7 +85,6 @@ module DataMapper
                end
 
         name = DataMapper::Inflector.demodulize(name) unless @full_names
-
         return name
       end
 
@@ -154,7 +154,7 @@ module DataMapper
       #
       def model_name(model)
         if @naming == :schema
-          name = model_repository_name(model)
+          name         = model_repository_name(model)
           storage_name = model.storage_names[:default]
           storage_name ||= NamingConventions::Resource::UnderscoredAndPluralized.call(model.name)
 

@@ -55,12 +55,12 @@ module DataMapper
 
         @colors = {
           :one_to_many => 'blue',
-          :one_to_one => 'red',
+          :one_to_one  => 'red',
           :inheritence => 'cyan'
         }
         @labels = {
           :one_to_many => '1:m',
-          :one_to_one => '1:1'
+          :one_to_one  => '1:1'
         }
 
         if options[:file]
