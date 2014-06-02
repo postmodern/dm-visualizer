@@ -1,3 +1,8 @@
+### 0.2.3 / 2014-06-02
+
+* Rescue the `Bundler::BundlerError` exception when activating a bundled
+  project.
+
 ### 0.2.2 / 2012-08-03
 
 * Relax version requirements for dependencies.
