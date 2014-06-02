@@ -1,12 +1,9 @@
 require 'rubygems'
-require 'bundler'
 
 begin
-  Bundler.setup(:development, :doc)
-rescue Bundler::BundlerError => e
-  warn e.message
-  warn "Run `bundle install` to install missing gems"
-  exit e.status_code
+  require 'bundler/setup'
+rescue LoadError => e
+  abort e.message
 end
 
 require 'rake'
