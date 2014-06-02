@@ -163,7 +163,7 @@ module DataMapper
 
       #
       # Enumerates over each DataMapper Model loaded from the project.
-      #
+      
       # @yield [model]
       #   The given block will be passed every model registered with
       #   DataMapper.
@@ -196,7 +196,7 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_model_inheritence
-        return enum_for(:each_model_inheritence) unless block_given?
+        return enum_for(__method__) unless block_given?
 
         each_model do |model|
           direct_ancestor = model.ancestors[1]
@@ -227,7 +227,7 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_foreign_key(model)
-        return enum_for(:each_foreign_key,model) unless block_given?
+        return enum_for(__method__,model) unless block_given?
 
         # XXX: in dm-core 1.1.0, `Model#relationships` returns a
         # `DataMapper::RelationshipSet`, instead of a `Mash`, which does
@@ -259,7 +259,7 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_property(model)
-        return enum_for(:each_property,model) unless block_given?
+        return enum_for(__method__,model) unless block_given?
 
         foreign_keys = Set[]
 
@@ -289,7 +289,7 @@ module DataMapper
       #   If no block is given, an Enumerator object will be returned.
       #
       def each_relationship
-        return enum_for(:each_relationship) unless block_given?
+        return enum_for(__method__) unless block_given?
 
         each_model do |model|
           each_relationship_for(model) do |relationship|
@@ -327,10 +327,8 @@ module DataMapper
         # not provide the `each_value` method.
         model.relationships.each do |args|
           relationship = case args
-                         when Array
-                           args.last
-                         else
-                           args
+                         when Array then args.last
+                         else            args
                          end
 
           unless relationship.respond_to?(:through)
