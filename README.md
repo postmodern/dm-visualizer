@@ -18,7 +18,7 @@ DataMapper based Ruby project.
 * Generates [GraphViz] diagrams for a project:
   * Supports generating Relational and Schema diagrams.
   * Provides PNG and SVG output.
-  * Provides Rake tasks for both Ruby libraries and dm-rails apps.
+  * Provides Rake tasks for both Ruby libraries and [dm-rails] apps.
 * Supports [DataMapper] >= 1.0.0.
 
 ## Examples
