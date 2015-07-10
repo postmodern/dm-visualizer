@@ -43,4 +43,25 @@ describe DataMapper::Visualizer::Project do
       Object.should be_const_defined('Comment')
     end
   end
+
+  context "rails" do
+    let(:dir) { project_dir('rails') }
+
+    subject do
+      described_class.new(
+        :include     => [dir],
+        :require_all => ['models/*.rb']
+      )
+    end
+
+    it_should_behave_like "a Ruby project"
+
+    it "should require all paths that match the specified glob patterns" do
+      subject.load!
+
+      Object.should be_const_defined('User')
+      Object.should be_const_defined('Post')
+      Object.should be_const_defined('Comment')
+    end
+  end
 end
