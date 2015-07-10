@@ -31,6 +31,12 @@ Add the `dm:doc:graphviz` rake tasks to a Ruby library:
       :require => ['my_library/models']
     )
 
+Add the `dm:doc:graphviz` rake tasks to a [Padrino](http://www.padrinorb.com/)
+app:
+
+    require 'dm-visualizer/rake/padrino/graphviz_task'
+    DataMapper::Visualizer::Rake::Padrino::GraphVizTask.new
+
 Add the `dm:doc:graphviz` rake tasks to a [dm-rails](http://github.com/datamapper/dm-rails) app:
 
     require 'dm-visualizer/rake/rails/graphviz_task'
