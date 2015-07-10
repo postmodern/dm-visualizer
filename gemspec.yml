@@ -1,5 +1,5 @@
 name: dm-visualizer
-version: 0.2.3
+version: 0.3.0
 summary:
   Visualizes the Models, Properties and Relationships defined in a
   DataMapper based Ruby project.
