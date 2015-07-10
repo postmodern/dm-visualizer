@@ -15,11 +15,11 @@ DataMapper based Ruby project.
 
 * Safely loads the models of a project.
 * Supports using [Bundler].
-* Generates GraphViz diagrams for a project:
+* Generates [GraphViz] diagrams for a project:
   * Supports generating Relational and Schema diagrams.
   * Provides PNG and SVG output.
   * Provides Rake tasks for both Ruby libraries and dm-rails apps.
-* Supports DataMapper >= 1.0.0.
+* Supports [DataMapper] >= 1.0.0.
 
 ## Examples
 
@@ -56,6 +56,8 @@ Copyright (c) 2010-2012 Hal Brodigan
 
 See {file:LICENSE.txt} for license information.
 
+[GraphViz]: http://www.graphviz.org/
+[DataMapper]: http://datamapper.org/
 [Bundler]: http://bundler.io/
 [Padrino]: http://www.padrinorb.com/
 [dm-rails]: http://github.com/datamapper/dm-rails
