@@ -14,7 +14,7 @@ DataMapper based Ruby project.
 ## Features
 
 * Safely loads the models of a project.
-* Supports using [Gem Bundler](http://gembundler.com/).
+* Supports using [Bundler].
 * Generates GraphViz diagrams for a project:
   * Supports generating Relational and Schema diagrams.
   * Provides PNG and SVG output.
@@ -31,21 +31,20 @@ Add the `dm:doc:graphviz` rake tasks to a Ruby library:
       :require => ['my_library/models']
     )
 
-Add the `dm:doc:graphviz` rake tasks to a [Padrino](http://www.padrinorb.com/)
-app:
+Add the `dm:doc:graphviz` rake tasks to a [Padrino] app:
 
     require 'dm-visualizer/rake/padrino/graphviz_task'
     DataMapper::Visualizer::Rake::Padrino::GraphVizTask.new
 
-Add the `dm:doc:graphviz` rake tasks to a [dm-rails](http://github.com/datamapper/dm-rails) app:
+Add the `dm:doc:graphviz` rake tasks to a [dm-rails] app:
 
     require 'dm-visualizer/rake/rails/graphviz_task'
     DataMapper::Visualizer::Rake::Rails::GraphVizTask.new
 
 ## Requirements
 
-* [ruby-graphviz](http://rubygems.org/gems/ruby-graphviz) ~> 1.0
-* [dm-core](http://github.com/datamapper/dm-core) ~> 1.0
+* [ruby-graphviz] ~> 1.0
+* [dm-core] ~> 1.0
 
 ## Install
 
@@ -56,3 +55,10 @@ Add the `dm:doc:graphviz` rake tasks to a [dm-rails](http://github.com/datamappe
 Copyright (c) 2010-2012 Hal Brodigan
 
 See {file:LICENSE.txt} for license information.
+
+[Bundler]: http://bundler.io/
+[Padrino]: http://www.padrinorb.com/
+[dm-rails]: http://github.com/datamapper/dm-rails
+
+[ruby-graphviz]: http://rubygems.org/gems/ruby-graphviz
+[dm-core]: http://github.com/datamapper/dm-core
